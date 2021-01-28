@@ -73,7 +73,8 @@ public class HairSelection : MonoBehaviour
 
     public void OnClickCloseButton()
     {
-        SceneManager.LoadScene("Game Scene");
+        genderPanel.SetActive(!genderPanel.activeSelf);
+        coverPanel.SetActive(!coverPanel.activeSelf);
     }
 
 }
