@@ -11,13 +11,8 @@ public class HairSelection : MonoBehaviour
     public GameObject coverPanel;
     public GameManager gameManager;
 
-    void Awake()
-    {
-        gameManager = GetComponent<GameManager>();
-    }
     public void OnClickStylekButton() 
     {
-
         //누른 버튼의 정보 가져오기 
         string type = EventSystem.current.currentSelectedGameObject.name;
         gameManager.SelectStage(FindStage(type));
@@ -73,8 +68,7 @@ public class HairSelection : MonoBehaviour
 
     public void OnClickCloseButton()
     {
-        genderPanel.SetActive(!genderPanel.activeSelf);
-        coverPanel.SetActive(!coverPanel.activeSelf);
+        SceneManager.LoadScene("Game Scene");
     }
 
 }

@@ -491,6 +491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
+  gameManager: {fileID: 988008972}
 --- !u!114 &125628249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -868,6 +869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
+  gameManager: {fileID: 988008972}
 --- !u!114 &345705937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,6 +1094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
+  gameManager: {fileID: 988008972}
 --- !u!114 &392155773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1531,6 +1534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
+  gameManager: {fileID: 988008972}
 --- !u!114 &693500047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1677,6 +1681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
+  gameManager: {fileID: 988008972}
 --- !u!114 &714805054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2065,6 +2070,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964694946}
   m_CullTransparentMesh: 0
+--- !u!1 &988008971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 988008973}
+  - component: {fileID: 988008972}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &988008972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988008971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f8186c8145bc0488cea170570f0eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+--- !u!4 &988008973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988008971}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1208688082
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,6 +2402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
+  gameManager: {fileID: 988008972}
 --- !u!114 &1325171321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2499,6 +2549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
+  gameManager: {fileID: 988008972}
 --- !u!114 &1481712554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2645,6 +2696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
+  gameManager: {fileID: 988008972}
 --- !u!114 &1520079335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2860,6 +2912,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
+  gameManager: {fileID: 988008972}
 --- !u!1 &1790503669
 GameObject:
   m_ObjectHideFlags: 0
@@ -2914,6 +2967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
+  gameManager: {fileID: 988008972}
 --- !u!114 &1790503672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3221,6 +3275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
+  gameManager: {fileID: 988008972}
 --- !u!114 &1873303100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3367,6 +3422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
+  gameManager: {fileID: 988008972}
 --- !u!114 &1888759738
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,27 +4,28 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Player player;
+    int stage;
     bool isWoman;
     bool isMan;
 
     private void Awake()
     {
-        player = GetComponent<Player>();
+        isWoman = false;
+        isMan = false;
     }
 
-    public void SelectStage(int stage)
+    public void SelectStage(int sta)
     {
-        player.stage = stage;
+        stage = sta;
     }
     public void SelectMan()
     {
-        player.isWoman = false;
-        player.isMan = true;
+        isWoman = false;
+        isMan = true;
     }
     public void SelectWoman()
     {
-        player.isWoman = true;
-        player.isMan = false;
+        isWoman = true;
+        isMan = false;
     }
 }
