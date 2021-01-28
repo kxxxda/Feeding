@@ -2082,7 +2082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1208688083
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2398,7 +2398,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1724781294}
-        m_MethodName: OnClickCloseButton
+        m_MethodName: OnClickBackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
