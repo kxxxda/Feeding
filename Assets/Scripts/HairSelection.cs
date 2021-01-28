@@ -20,5 +20,9 @@ public class HairSelection : MonoBehaviour
         SceneManager.LoadScene("Start Scene");
     }
 
+    public void OnClickCloseButton()
+    {
+        SceneManager.LoadScene("Game Scene");
+    }
 
 }
