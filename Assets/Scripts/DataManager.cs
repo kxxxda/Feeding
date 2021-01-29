@@ -7,16 +7,16 @@ using System.IO;
 
 public class DataManager : MonoBehaviour
 {
-    public static DataManager Instance;
+    public static DataManager dataManager;
     public GameData data;
     void Awake()
     {
         Debug.Log("1");
-        if(Instance != null)
+        if(dataManager != null)
         {
             Destroy(gameObject);
         }
-        Instance = this;
+        dataManager = this;
         DontDestroyOnLoad(gameObject);
     }
     void Start()

@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData 
 {
-    public int stage1;
+    public int stage1;//스테이지 활설화 :1, 비활성화 : 0
     public int stage2;
     public int stage3;
     public int stage4;

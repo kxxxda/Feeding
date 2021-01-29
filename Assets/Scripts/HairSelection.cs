@@ -15,7 +15,7 @@ public class HairSelection : MonoBehaviour
     {
         //누른 버튼의 정보 가져오기 
         string type = EventSystem.current.currentSelectedGameObject.name;
-        gameManager.SelectStage(FindStage(type));
+        gameManager.SelectStage(FindStage(type)); //게임 매니저가 아니라 데이터 매니저로 옮기고 관리해야함
 
         //(나중에) 세이브 파일이 있다면 로드하기 
 
@@ -51,15 +51,7 @@ public class HairSelection : MonoBehaviour
         }
         return 0;
     }
-    public void OnSelectWoman()
-    {
-        gameManager.SelectWoman();   
-    }
-
-    public void OnSelectMan()
-    {
-        gameManager.SelectMan();
-    }
+    
 
     public void OnClickBackButton() 
     {
