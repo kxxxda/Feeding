@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        //Debug.Log("GameManager Awake");
         isWoman = false;
         isMan = false;
     }
