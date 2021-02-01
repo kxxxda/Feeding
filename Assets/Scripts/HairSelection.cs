@@ -10,6 +10,8 @@ public class HairSelection : MonoBehaviour
     public GameObject genderPanel;
     public GameObject coverPanel;
     public GameManager gameManager;
+    public GameData gameData;
+
 
     public void OnClickStylekButton() 
     {
@@ -21,8 +23,13 @@ public class HairSelection : MonoBehaviour
 
 
         //처음이라면 성별 고르기 팝업 창 띄우기
-        genderPanel.SetActive(!genderPanel.activeSelf);
-        coverPanel.SetActive(!coverPanel.activeSelf);
+        if (type=="MargeButton") // 마지버튼은 성별 고르기 팝업 없이 진행
+            Debug.Log("성별 고르기 팝업 없이");
+        else { //나머지 버튼들은 성별 고르기 팝업 띄우기
+            genderPanel.SetActive(!genderPanel.activeSelf);
+            coverPanel.SetActive(!coverPanel.activeSelf);        
+        }
+
 
         //고른 성별로 시작하기
 
