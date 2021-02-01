@@ -14,6 +14,16 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameManager Awake");
         dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
+       
+    }
+    private void Start()
+    {
+        ActivateStage();
+    }
+
+    public void ActivateStage()
+    {
+        //여기 리팩토링 보류 --> 우선 gameData.cs 정리하고 다시 건드리기
         if (dataManager.data.stage1 == 0)
         {
             stageButton[0].interactable = false; // 0이면 버튼 클릭을 비활성
@@ -47,7 +57,6 @@ public class GameManager : MonoBehaviour
             stageButton[7].interactable = false; // 버튼 클릭을 비활성
         }
     }
-   
     public void SelectStage(int sta)
     {
         stage = sta; //현재 클릭한 버튼의 스테이지 정보
