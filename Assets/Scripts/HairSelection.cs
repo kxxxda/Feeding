@@ -71,4 +71,9 @@ public class HairSelection : MonoBehaviour
         coverPanel.SetActive(!coverPanel.activeSelf);
     }
 
+    public void OnClickStartButton()
+    {
+        SceneManager.LoadScene("Game Scene");
+    }
+
 }

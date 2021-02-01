@@ -11,5 +11,18 @@ public class HairSpray : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    private void OnEnable()
+    {
+        Invoke("Disable", 0.25f);
+    }
 
+    void Disable()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void StartSpray()
+    {
+        anim.SetTrigger("OnSpray");
+    }
 }
