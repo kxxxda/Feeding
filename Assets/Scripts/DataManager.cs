@@ -8,23 +8,16 @@ using System.IO;
 public class DataManager : MonoBehaviour
 {
     public static DataManager dataManager;
-
-    public GameData data;//세이브 파일 데이터
-
-    public int currentStage; //현재 진행할 스테이지 정보 
-    public int currentClickCount;//현재 진행하는 스테이지 클릭수
-    public int currentGender;//0이면 아직 게임진행 x
+    public GameData data;
     void Awake()
     {
         Debug.Log("1");
         if(dataManager != null)
         {
-            Destroy(this.gameObject);
-            return;
+            Destroy(gameObject);
         }
         dataManager = this;
-        DontDestroyOnLoad(this);
-
+        DontDestroyOnLoad(gameObject);
     }
     void Start()
     {
@@ -51,17 +44,30 @@ public class DataManager : MonoBehaviour
         Debug.Log("세이브 파일 생성중");
 
         data = new GameData();
-        data.stageCount = 8; //스테이지 개수
-        data.stageActivate = new int[data.stageCount];
-        data.gender = new int[data.stageCount];
-        data.clickCount = new int[data.stageCount];
-
-        for(int i=0;i<data.stageCount;i++)
-        {
-            InitiateStage(i);
-        }
-        data.stageActivate[0] = 1; //default값인 1번째 스테이지 오픈
-        data.gender[7] = 3;
+        data.stage1 = 1; //스테이지 활성화 : 1, 비활성화 :0
+        data.stage2 = 0;
+        data.stage3 = 0;
+        data.stage4 = 0;
+        data.stage5 = 0;
+        data.stage6 = 0;
+        data.stage7 = 0;
+        data.stage8 = 0;
+        data.gender1 = 0;
+        data.gender2 = 0;
+        data.gender3 = 0;
+        data.gender4 = 0;
+        data.gender5 = 0;
+        data.gender6 = 0;
+        data.gender7 = 0;
+        data.gender8 = 3;//마지 샘숭은 특수 캐릭터
+        data.clickCount1 = 0;
+        data.clickCount2 = 0;
+        data.clickCount3 = 0;
+        data.clickCount4 = 0;
+        data.clickCount5 = 0;
+        data.clickCount6 = 0;
+        data.clickCount7 = 0;
+        data.clickCount8 = 0;
 
         //안드로이드는 이걸로 바꿔야 됨
         //Application.persistentDataPath
@@ -71,22 +77,5 @@ public class DataManager : MonoBehaviour
     {
         string path = File.ReadAllText(Application.dataPath + "/GameData.json");
         data = JsonUtility.FromJson<GameData>(path);
-    }
-
-    void InitiateStage(int stageNum)//스테이지 초기화
-    {
-        data.stageActivate[stageNum] = 0;
-        data.gender[stageNum] = 0;
-        data.clickCount[stageNum] = 0;
-    }
-
-    void SaveStage()//스테이지의 성별,클릭수 저장
-    {
-        data.clickCount[dataManager.currentStage] = dataManager.currentClickCount;
-        data.gender[dataManager.currentStage] = dataManager.currentGender;
-    }
-    void SaveStageActivation()//스테이지 활성화하기
-    {
-        data.stageActivate[dataManager.currentStage] = 1;
     }
 }
