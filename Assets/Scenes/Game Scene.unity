@@ -178,7 +178,6 @@ GameObject:
   - component: {fileID: 198036724}
   - component: {fileID: 198036723}
   - component: {fileID: 198036722}
-  - component: {fileID: 198036721}
   m_Layer: 5
   m_Name: Button1
   m_TagString: Untagged
@@ -206,46 +205,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 160, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &198036721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 198036719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d98328203f28cd459ccccb203cfd153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genderPanel: {fileID: 1609242324}
-  coverPanel: {fileID: 0}
-  gameManager: {fileID: 0}
-  gameData:
-    stage1: 0
-    stage2: 0
-    stage3: 0
-    stage4: 0
-    stage5: 0
-    stage6: 0
-    stage7: 0
-    stage8: 0
-    gender1: 0
-    gender2: 0
-    gender3: 0
-    gender4: 0
-    gender5: 0
-    gender6: 0
-    gender7: 0
-    gender8: 0
-    clickCount1: 0
-    clickCount2: 0
-    clickCount3: 0
-    clickCount4: 0
-    clickCount5: 0
-    clickCount6: 0
-    clickCount7: 0
-    clickCount8: 0
 --- !u!114 &198036722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,7 +988,6 @@ GameObject:
   - component: {fileID: 1135857315}
   - component: {fileID: 1135857314}
   - component: {fileID: 1135857313}
-  - component: {fileID: 1135857312}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -1057,46 +1015,6 @@ RectTransform:
   m_AnchoredPosition: {x: -12, y: -15}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &1135857312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135857310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d98328203f28cd459ccccb203cfd153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genderPanel: {fileID: 1609242324}
-  coverPanel: {fileID: 0}
-  gameManager: {fileID: 0}
-  gameData:
-    stage1: 0
-    stage2: 0
-    stage3: 0
-    stage4: 0
-    stage5: 0
-    stage6: 0
-    stage7: 0
-    stage8: 0
-    gender1: 0
-    gender2: 0
-    gender3: 0
-    gender4: 0
-    gender5: 0
-    gender6: 0
-    gender7: 0
-    gender8: 0
-    clickCount1: 0
-    clickCount2: 0
-    clickCount3: 0
-    clickCount4: 0
-    clickCount5: 0
-    clickCount6: 0
-    clickCount7: 0
-    clickCount8: 0
 --- !u!114 &1135857313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1679,7 +1597,6 @@ GameObject:
   - component: {fileID: 1277749065}
   - component: {fileID: 1277749064}
   - component: {fileID: 1277749063}
-  - component: {fileID: 1277749062}
   m_Layer: 5
   m_Name: Button2
   m_TagString: Untagged
@@ -1707,46 +1624,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 160, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1277749062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1277749060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d98328203f28cd459ccccb203cfd153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genderPanel: {fileID: 1609242324}
-  coverPanel: {fileID: 0}
-  gameManager: {fileID: 0}
-  gameData:
-    stage1: 0
-    stage2: 0
-    stage3: 0
-    stage4: 0
-    stage5: 0
-    stage6: 0
-    stage7: 0
-    stage8: 0
-    gender1: 0
-    gender2: 0
-    gender3: 0
-    gender4: 0
-    gender5: 0
-    gender6: 0
-    gender7: 0
-    gender8: 0
-    clickCount1: 0
-    clickCount2: 0
-    clickCount3: 0
-    clickCount4: 0
-    clickCount5: 0
-    clickCount6: 0
-    clickCount7: 0
-    clickCount8: 0
 --- !u!114 &1277749063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1929,7 +1806,6 @@ GameObject:
   - component: {fileID: 1558070552}
   - component: {fileID: 1558070551}
   - component: {fileID: 1558070550}
-  - component: {fileID: 1558070549}
   m_Layer: 5
   m_Name: Button3
   m_TagString: Untagged
@@ -1957,46 +1833,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -90}
   m_SizeDelta: {x: 160, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1558070549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1558070547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d98328203f28cd459ccccb203cfd153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genderPanel: {fileID: 1609242324}
-  coverPanel: {fileID: 0}
-  gameManager: {fileID: 0}
-  gameData:
-    stage1: 0
-    stage2: 0
-    stage3: 0
-    stage4: 0
-    stage5: 0
-    stage6: 0
-    stage7: 0
-    stage8: 0
-    gender1: 0
-    gender2: 0
-    gender3: 0
-    gender4: 0
-    gender5: 0
-    gender6: 0
-    gender7: 0
-    gender8: 0
-    clickCount1: 0
-    clickCount2: 0
-    clickCount3: 0
-    clickCount4: 0
-    clickCount5: 0
-    clickCount6: 0
-    clickCount7: 0
-    clickCount8: 0
 --- !u!114 &1558070550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2249,7 +2085,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 871341855}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.99999225
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
