@@ -11,14 +11,13 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
+        dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
     }
     private void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
-            dataManager.data.clickCount[dataManager.currentStage]+=1;
-
+            dataManager.data.clickCount1+=1;
             Vector2 mousePosition = Input.mousePosition;
             mousePosition = mainCamera.ScreenToWorldPoint(mousePosition);
 

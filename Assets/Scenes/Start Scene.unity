@@ -431,7 +431,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22511fd1671f11429f30d832d9705b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
 --- !u!4 &1210628124
 Transform:
   m_ObjectHideFlags: 0
@@ -844,7 +843,7 @@ GameObject:
   - component: {fileID: 2024858477}
   - component: {fileID: 2024858476}
   m_Layer: 0
-  m_Name: Data Manager
+  m_Name: DataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -863,10 +862,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    stageCount: 0
-    stageActivate: 
-    gender: 
-    clickCount: 
+    stage1: 0
+    stage2: 0
+    stage3: 0
+    stage4: 0
+    stage5: 0
+    stage6: 0
+    stage7: 0
+    stage8: 0
+    gender1: 0
+    gender2: 0
+    gender3: 0
+    gender4: 0
+    gender5: 0
+    gender6: 0
+    gender7: 0
+    gender8: 0
+    clickCount1: 0
+    clickCount2: 0
+    clickCount3: 0
+    clickCount4: 0
+    clickCount5: 0
+    clickCount6: 0
+    clickCount7: 0
+    clickCount8: 0
 --- !u!4 &2024858477
 Transform:
   m_ObjectHideFlags: 0

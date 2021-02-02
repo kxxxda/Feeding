@@ -280,18 +280,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 10383826}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1724781294}
-        m_MethodName: OnClickManButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &10383826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,18 +399,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 45580157}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1724781294}
-        m_MethodName: OnClickWomanButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &45580157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,16 +491,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
+  gameManager: {fileID: 988008972}
+  gameData:
+    stage1: 0
+    stage2: 0
+    stage3: 0
+    stage4: 0
+    stage5: 0
+    stage6: 0
+    stage7: 0
+    stage8: 0
+    gender1: 0
+    gender2: 0
+    gender3: 0
+    gender4: 0
+    gender5: 0
+    gender6: 0
+    gender7: 0
+    gender8: 0
+    clickCount1: 0
+    clickCount2: 0
+    clickCount3: 0
+    clickCount4: 0
+    clickCount5: 0
+    clickCount6: 0
+    clickCount7: 0
+    clickCount8: 0
 --- !u!114 &125628249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,7 +798,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 964694947}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.87539995
+  m_Size: 0.87478226
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -900,16 +894,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
+  gameManager: {fileID: 988008972}
+  gameData:
+    stage1: 0
+    stage2: 0
+    stage3: 0
+    stage4: 0
+    stage5: 0
+    stage6: 0
+    stage7: 0
+    stage8: 0
+    gender1: 0
+    gender2: 0
+    gender3: 0
+    gender4: 0
+    gender5: 0
+    gender6: 0
+    gender7: 0
+    gender8: 0
+    clickCount1: 0
+    clickCount2: 0
+    clickCount3: 0
+    clickCount4: 0
+    clickCount5: 0
+    clickCount6: 0
+    clickCount7: 0
+    clickCount8: 0
 --- !u!114 &345705937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1134,16 +1144,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
+  gameManager: {fileID: 988008972}
+  gameData:
+    stage1: 0
+    stage2: 0
+    stage3: 0
+    stage4: 0
+    stage5: 0
+    stage6: 0
+    stage7: 0
+    stage8: 0
+    gender1: 0
+    gender2: 0
+    gender3: 0
+    gender4: 0
+    gender5: 0
+    gender6: 0
+    gender7: 0
+    gender8: 0
+    clickCount1: 0
+    clickCount2: 0
+    clickCount3: 0
+    clickCount4: 0
+    clickCount5: 0
+    clickCount6: 0
+    clickCount7: 0
+    clickCount8: 0
 --- !u!114 &392155773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1583,16 +1609,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
+  gameManager: {fileID: 988008972}
+  gameData:
+    stage1: 0
+    stage2: 0
+    stage3: 0
+    stage4: 0
+    stage5: 0
+    stage6: 0
+    stage7: 0
+    stage8: 0
+    gender1: 0
+    gender2: 0
+    gender3: 0
+    gender4: 0
+    gender5: 0
+    gender6: 0
+    gender7: 0
+    gender8: 0
+    clickCount1: 0
+    clickCount2: 0
+    clickCount3: 0
+    clickCount4: 0
+    clickCount5: 0
+    clickCount6: 0
+    clickCount7: 0
+    clickCount8: 0
 --- !u!114 &693500047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1739,16 +1781,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
+  gameManager: {fileID: 988008972}
+  gameData:
+    stage1: 0
+    stage2: 0
+    stage3: 0
+    stage4: 0
+    stage5: 0
+    stage6: 0
+    stage7: 0
+    stage8: 0
+    gender1: 0
+    gender2: 0
+    gender3: 0
+    gender4: 0
+    gender5: 0
+    gender6: 0
+    gender7: 0
+    gender8: 0
+    clickCount1: 0
+    clickCount2: 0
+    clickCount3: 0
+    clickCount4: 0
+    clickCount5: 0
+    clickCount6: 0
+    clickCount7: 0
+    clickCount8: 0
 --- !u!114 &714805054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2502,16 +2560,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
+  gameManager: {fileID: 988008972}
+  gameData:
+    stage1: 0
+    stage2: 0
+    stage3: 0
+    stage4: 0
+    stage5: 0
+    stage6: 0
+    stage7: 0
+    stage8: 0
+    gender1: 0
+    gender2: 0
+    gender3: 0
+    gender4: 0
+    gender5: 0
+    gender6: 0
+    gender7: 0
+    gender8: 0
+    clickCount1: 0
+    clickCount2: 0
+    clickCount3: 0
+    clickCount4: 0
+    clickCount5: 0
+    clickCount6: 0
+    clickCount7: 0
+    clickCount8: 0
 --- !u!114 &1325171321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2658,16 +2732,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
+  gameManager: {fileID: 988008972}
+  gameData:
+    stage1: 0
+    stage2: 0
+    stage3: 0
+    stage4: 0
+    stage5: 0
+    stage6: 0
+    stage7: 0
+    stage8: 0
+    gender1: 0
+    gender2: 0
+    gender3: 0
+    gender4: 0
+    gender5: 0
+    gender6: 0
+    gender7: 0
+    gender8: 0
+    clickCount1: 0
+    clickCount2: 0
+    clickCount3: 0
+    clickCount4: 0
+    clickCount5: 0
+    clickCount6: 0
+    clickCount7: 0
+    clickCount8: 0
 --- !u!114 &1481712554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2814,16 +2904,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
+  gameManager: {fileID: 988008972}
+  gameData:
+    stage1: 0
+    stage2: 0
+    stage3: 0
+    stage4: 0
+    stage5: 0
+    stage6: 0
+    stage7: 0
+    stage8: 0
+    gender1: 0
+    gender2: 0
+    gender3: 0
+    gender4: 0
+    gender5: 0
+    gender6: 0
+    gender7: 0
+    gender8: 0
+    clickCount1: 0
+    clickCount2: 0
+    clickCount3: 0
+    clickCount4: 0
+    clickCount5: 0
+    clickCount6: 0
+    clickCount7: 0
+    clickCount8: 0
 --- !u!114 &1520079335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3039,16 +3145,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
+  gameManager: {fileID: 988008972}
+  gameData:
+    stage1: 0
+    stage2: 0
+    stage3: 0
+    stage4: 0
+    stage5: 0
+    stage6: 0
+    stage7: 0
+    stage8: 0
+    gender1: 0
+    gender2: 0
+    gender3: 0
+    gender4: 0
+    gender5: 0
+    gender6: 0
+    gender7: 0
+    gender8: 0
+    clickCount1: 0
+    clickCount2: 0
+    clickCount3: 0
+    clickCount4: 0
+    clickCount5: 0
+    clickCount6: 0
+    clickCount7: 0
+    clickCount8: 0
 --- !u!1 &1790503669
 GameObject:
   m_ObjectHideFlags: 0
@@ -3103,16 +3225,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
+  gameManager: {fileID: 988008972}
+  gameData:
+    stage1: 0
+    stage2: 0
+    stage3: 0
+    stage4: 0
+    stage5: 0
+    stage6: 0
+    stage7: 0
+    stage8: 0
+    gender1: 0
+    gender2: 0
+    gender3: 0
+    gender4: 0
+    gender5: 0
+    gender6: 0
+    gender7: 0
+    gender8: 0
+    clickCount1: 0
+    clickCount2: 0
+    clickCount3: 0
+    clickCount4: 0
+    clickCount5: 0
+    clickCount6: 0
+    clickCount7: 0
+    clickCount8: 0
 --- !u!114 &1790503672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3420,16 +3558,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
+  gameManager: {fileID: 988008972}
+  gameData:
+    stage1: 0
+    stage2: 0
+    stage3: 0
+    stage4: 0
+    stage5: 0
+    stage6: 0
+    stage7: 0
+    stage8: 0
+    gender1: 0
+    gender2: 0
+    gender3: 0
+    gender4: 0
+    gender5: 0
+    gender6: 0
+    gender7: 0
+    gender8: 0
+    clickCount1: 0
+    clickCount2: 0
+    clickCount3: 0
+    clickCount4: 0
+    clickCount5: 0
+    clickCount6: 0
+    clickCount7: 0
+    clickCount8: 0
 --- !u!114 &1873303100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3576,16 +3730,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genderPanel: {fileID: 1208688082}
   coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
+  gameManager: {fileID: 988008972}
+  gameData:
+    stage1: 0
+    stage2: 0
+    stage3: 0
+    stage4: 0
+    stage5: 0
+    stage6: 0
+    stage7: 0
+    stage8: 0
+    gender1: 0
+    gender2: 0
+    gender3: 0
+    gender4: 0
+    gender5: 0
+    gender6: 0
+    gender7: 0
+    gender8: 0
+    clickCount1: 0
+    clickCount2: 0
+    clickCount3: 0
+    clickCount4: 0
+    clickCount5: 0
+    clickCount6: 0
+    clickCount7: 0
+    clickCount8: 0
 --- !u!114 &1888759738
 MonoBehaviour:
   m_ObjectHideFlags: 0
