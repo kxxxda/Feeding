@@ -323,7 +323,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hairSpray: {fileID: 547759777}
-  dataManager: {fileID: 0}
 --- !u!1 &636670680
 GameObject:
   m_ObjectHideFlags: 0
