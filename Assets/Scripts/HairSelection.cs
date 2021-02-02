@@ -56,6 +56,7 @@ public class HairSelection : MonoBehaviour
         {
             dataManager.currentGender = dataManager.data.gender[dataManager.currentStage];
             dataManager.currentClickCount = dataManager.data.clickCount[dataManager.currentStage];
+            OnClickStartButton();
         }
 
         //고른 성별로 시작하기

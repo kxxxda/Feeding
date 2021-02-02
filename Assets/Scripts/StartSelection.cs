@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class MenuSelection : MonoBehaviour
+public class StartSelection : MonoBehaviour
 {
-    public GameManager gameManager;
     public void GameStart()
     {
         SceneManager.LoadScene("Menu Scene");
