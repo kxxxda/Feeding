@@ -9,27 +9,54 @@ public class HairSelection : MonoBehaviour
 {
     public GameObject genderPanel;
     public GameObject coverPanel;
-    public GameManager gameManager;
-    public GameData gameData;
+    public DataManager dataManager;
+    public Button[] stageButton;
+    
+    
 
+    private void Awake()
+    {
+        dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
+        
+    }
+    private void Update()
+    {
+        ActivateStage();
+    }
 
+    public void ActivateStage()
+    {
+        for (int i = 0; i < dataManager.data.stageCount; i++)
+            ActivateStage(i);
+    }
+
+    public void ActivateStage(int stageNum)
+    {
+        if (dataManager.data.stageActivate[stageNum] == 0)
+            stageButton[stageNum].interactable = false; // 0이면 버튼 클릭을 비활성
+        else
+            stageButton[stageNum].interactable = true;
+    }
+
+   
     public void OnClickStylekButton() 
     {
         //누른 버튼의 정보 가져오기 
         string type = EventSystem.current.currentSelectedGameObject.name;
-        gameManager.SelectStage(FindStage(type)); //게임 매니저가 아니라 데이터 매니저로 옮기고 관리해야함
+        dataManager.currentStage = FindStage(type); //데이터매니저에 고른 스테이지 정보 저장
 
-        //(나중에) 세이브 파일이 있다면 로드하기 
-
-
-        //처음이라면 성별 고르기 팝업 창 띄우기
-        if (type=="MargeButton") // 마지버튼은 성별 고르기 팝업 없이 진행
-            Debug.Log("성별 고르기 팝업 없이");
-        else { //나머지 버튼들은 성별 고르기 팝업 띄우기
+        
+        if(dataManager.data.clickCount[dataManager.currentStage]==0) //세이브파일에서 해당 스테이지 시작했는지 확인//해당 스테이지가 처음이라면
+        {
+            //패널 열기
             genderPanel.SetActive(!genderPanel.activeSelf);
-            coverPanel.SetActive(!coverPanel.activeSelf);        
+            coverPanel.SetActive(!coverPanel.activeSelf);
         }
-
+        else //(나중에) 세이브 파일이 있다면 로드하기
+        {
+            dataManager.currentGender = dataManager.data.gender[dataManager.currentStage];
+            dataManager.currentClickCount = dataManager.data.clickCount[dataManager.currentStage];
+        }
 
         //고른 성별로 시작하기
 
@@ -40,32 +67,35 @@ public class HairSelection : MonoBehaviour
         switch (type)
         {
             case "StraightButton":
-                return 1;
+                return 0;
             case "CurlyButton":
-                return 2;
+                return 1;
             case "BraidedButton":
-                return 3;
+                return 2;
             case "MohicanButton":
-                return 4;
+                return 3;
             case "TaeyangButton":
-                return 5;
+                return 4;
             case "SandaraButton":
-                return 6;
+                return 5;
             case "MustacheButton":
-                return 7;
+                return 6;
             case "MargeButton":
-                return 8;
+                return 7;
         }
         return 0;
     }
     
-
-    public void OnClickBackButton() 
+    public void OnClickWomanButton()
     {
-        SceneManager.LoadScene("Start Scene");
+        dataManager.currentGender = 1;
+    }
+    public void OnClickManButton()
+    {
+        dataManager.currentGender = 2;
     }
 
-    public void OnClickCloseButton()
+    public void OnClickCloseButton()//성별 고르기 패널 열고 닫기
     {
         genderPanel.SetActive(!genderPanel.activeSelf);
         coverPanel.SetActive(!coverPanel.activeSelf);
@@ -73,7 +103,11 @@ public class HairSelection : MonoBehaviour
 
     public void OnClickStartButton()
     {
+        dataManager.data.gender[dataManager.currentStage] = dataManager.currentGender;//data에 현재 젠더 저장하면서 넘어가기
         SceneManager.LoadScene("Game Scene");
     }
-
+    public void OnClickBackButton() 
+    {
+        SceneManager.LoadScene("Start Scene");
+    }
 }
