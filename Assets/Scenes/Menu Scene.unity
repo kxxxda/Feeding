@@ -471,7 +471,6 @@ GameObject:
   - component: {fileID: 125628251}
   - component: {fileID: 125628250}
   - component: {fileID: 125628249}
-  - component: {fileID: 125628248}
   m_Layer: 5
   m_Name: BraidedButton
   m_TagString: Untagged
@@ -500,30 +499,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 192, y: 79}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &125628248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125628246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d98328203f28cd459ccccb203cfd153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genderPanel: {fileID: 1208688082}
-  coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
 --- !u!114 &125628249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -961,7 +936,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 964694947}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.87539995
+  m_Size: 0.87478226
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1015,7 +990,6 @@ GameObject:
   - component: {fileID: 345705939}
   - component: {fileID: 345705938}
   - component: {fileID: 345705937}
-  - component: {fileID: 345705936}
   m_Layer: 5
   m_Name: StraightButton
   m_TagString: Untagged
@@ -1044,30 +1018,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 192, y: 79}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &345705936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 345705934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d98328203f28cd459ccccb203cfd153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genderPanel: {fileID: 1208688082}
-  coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
 --- !u!114 &345705937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1250,7 +1200,6 @@ GameObject:
   - component: {fileID: 392155775}
   - component: {fileID: 392155774}
   - component: {fileID: 392155773}
-  - component: {fileID: 392155772}
   m_Layer: 5
   m_Name: CurlyButton
   m_TagString: Untagged
@@ -1279,30 +1228,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 192, y: 79}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &392155772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392155770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d98328203f28cd459ccccb203cfd153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genderPanel: {fileID: 1208688082}
-  coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
 --- !u!114 &392155773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2776,7 +2701,6 @@ GameObject:
   - component: {fileID: 1325171323}
   - component: {fileID: 1325171322}
   - component: {fileID: 1325171321}
-  - component: {fileID: 1325171320}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -2803,30 +2727,6 @@ RectTransform:
   m_AnchoredPosition: {x: 19, y: -25}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1325171320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1325171318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d98328203f28cd459ccccb203cfd153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genderPanel: {fileID: 1208688082}
-  coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
 --- !u!114 &1325171321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2931,7 +2831,6 @@ GameObject:
   - component: {fileID: 1481712556}
   - component: {fileID: 1481712555}
   - component: {fileID: 1481712554}
-  - component: {fileID: 1481712553}
   m_Layer: 5
   m_Name: MargeButton
   m_TagString: Untagged
@@ -2960,30 +2859,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 192, y: 79}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1481712553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1481712551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d98328203f28cd459ccccb203cfd153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genderPanel: {fileID: 1208688082}
-  coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
 --- !u!114 &1481712554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3166,7 +3041,6 @@ GameObject:
   - component: {fileID: 1520079337}
   - component: {fileID: 1520079336}
   - component: {fileID: 1520079335}
-  - component: {fileID: 1520079334}
   m_Layer: 5
   m_Name: MustacheButton
   m_TagString: Untagged
@@ -3195,30 +3069,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 192, y: 79}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1520079334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520079332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d98328203f28cd459ccccb203cfd153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genderPanel: {fileID: 1208688082}
-  coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
 --- !u!114 &1520079335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3534,7 +3384,6 @@ GameObject:
   - component: {fileID: 1790503674}
   - component: {fileID: 1790503673}
   - component: {fileID: 1790503672}
-  - component: {fileID: 1790503671}
   m_Layer: 5
   m_Name: TaeyangButton
   m_TagString: Untagged
@@ -3563,30 +3412,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 192, y: 79}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1790503671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1790503669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d98328203f28cd459ccccb203cfd153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genderPanel: {fileID: 1208688082}
-  coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
 --- !u!114 &1790503672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3852,7 +3677,6 @@ GameObject:
   - component: {fileID: 1873303102}
   - component: {fileID: 1873303101}
   - component: {fileID: 1873303100}
-  - component: {fileID: 1873303099}
   m_Layer: 5
   m_Name: MohicanButton
   m_TagString: Untagged
@@ -3881,30 +3705,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 192, y: 79}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1873303099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1873303097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d98328203f28cd459ccccb203cfd153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genderPanel: {fileID: 1208688082}
-  coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
 --- !u!114 &1873303100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4009,7 +3809,6 @@ GameObject:
   - component: {fileID: 1888759740}
   - component: {fileID: 1888759739}
   - component: {fileID: 1888759738}
-  - component: {fileID: 1888759737}
   m_Layer: 5
   m_Name: SandaraButton
   m_TagString: Untagged
@@ -4038,30 +3837,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 192, y: 79}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1888759737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888759735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d98328203f28cd459ccccb203cfd153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genderPanel: {fileID: 1208688082}
-  coverPanel: {fileID: 2125937116}
-  dataManager: {fileID: 0}
-  stageButton:
-  - {fileID: 345705937}
-  - {fileID: 125628249}
-  - {fileID: 392155773}
-  - {fileID: 1873303100}
-  - {fileID: 1888759738}
-  - {fileID: 1520079335}
-  - {fileID: 1790503672}
-  - {fileID: 1481712554}
 --- !u!114 &1888759738
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -32,10 +32,21 @@ public class HairSelection : MonoBehaviour
 
     public void ActivateStage(int stageNum)
     {
-        if (dataManager.data.stageActivate[stageNum] == 0)
+        GameObject hairText = stageButton[stageNum].transform.GetChild(0).gameObject;
+        GameObject coverText = stageButton[stageNum].transform.GetChild(1).gameObject;
+
+
+        if (dataManager.data.stageActivate[stageNum] == 0) { 
             stageButton[stageNum].interactable = false; // 0이면 버튼 클릭을 비활성
-        else
+            hairText.SetActive(false);
+            coverText.SetActive(true);
+        }
+            
+        else {
             stageButton[stageNum].interactable = true;
+            hairText.SetActive(true);
+            coverText.SetActive(false);
+        }
     }
 
    
