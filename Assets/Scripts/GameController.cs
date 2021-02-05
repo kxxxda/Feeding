@@ -41,11 +41,18 @@ public class GameController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            dataManager.data.clickCount[dataManager.currentStage] += 1;
-
             Vector2 mousePosition = Input.mousePosition;
             mousePosition = mainCamera.ScreenToWorldPoint(mousePosition);
-            SprayControl(mousePosition);
+
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, mainCamera.transform.forward);
+            if(hit.collider.name=="Content")
+            {
+                dataManager.data.clickCount[dataManager.currentStage] += 1;
+                dataManager.SaveFile();
+
+                SprayControl(mousePosition);
+            }
+            
         }
     }
 

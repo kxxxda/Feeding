@@ -16,7 +16,7 @@ public class DataManager : MonoBehaviour
     public int currentGender;//0이면 아직 게임진행 x
     void Awake()
     {
-        Debug.Log("1");
+        //Debug.Log("1");
         if(dataManager != null)
         {
             Destroy(this.gameObject);
@@ -28,7 +28,7 @@ public class DataManager : MonoBehaviour
     }
     void Start()
     {
-        Debug.Log("2");
+        //Debug.Log("2");
         ManageSaveFile();
     }
     
@@ -43,7 +43,7 @@ public class DataManager : MonoBehaviour
 
     bool FindSaveFile()
     {
-        Debug.Log(File.Exists(Application.dataPath + "/GameData.json"));
+        //Debug.Log(File.Exists(Application.dataPath + "/GameData.json"));
         return File.Exists(Application.dataPath + "/GameData.json");
     }
     void MakeSaveFile()
@@ -65,7 +65,7 @@ public class DataManager : MonoBehaviour
 
         //안드로이드는 이걸로 바꿔야 됨
         //Application.persistentDataPath
-        File.WriteAllText(Application.dataPath + "/GameData.json", JsonUtility.ToJson(data));
+        File.WriteAllText(Application.dataPath + "/GameData.json", JsonUtility.ToJson(data,true));
     }
     void LoadSaveFile()
     {
@@ -80,6 +80,10 @@ public class DataManager : MonoBehaviour
         data.clickCount[stageNum] = 0;
     }
 
+    public void SaveFile()
+    {
+        File.WriteAllText(Application.dataPath + "/GameData.json", JsonUtility.ToJson(data, true));
+    }
     void SaveStage()//스테이지의 성별,클릭수 저장
     {
         data.clickCount[dataManager.currentStage] = dataManager.currentClickCount;
