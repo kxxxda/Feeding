@@ -10,6 +10,7 @@ public class ObjectManager : MonoBehaviour
 
     //오브젝트 배열
     GameObject[] hairSpray;
+   
 
 
     //타겟 오브젝트 배열

@@ -10,10 +10,10 @@ public class GameController : MonoBehaviour
     private Camera mainCamera;
     private DataManager dataManager;
     private ObjectManager objectManager;
+    private ScrollRect scrollRect;
     private Touch tempTouchs;
     private Vector2 touchPos;
     private bool touchOn;
-    private ScrollRect scrollRect;
     public Text text;
 
     private int countLimit;
@@ -62,6 +62,8 @@ public class GameController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            //Debug.Log("클릭 수 : " + dataManager.data.clickCount[dataManager.currentStage]);
+
             Vector2 mousePosition = Input.mousePosition;
             mousePosition = mainCamera.ScreenToWorldPoint(mousePosition);
 

@@ -1034,6 +1034,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc97fe14a27247b45be0e767a9e709df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testingSpritePrefab: {fileID: 6948529033972803983, guid: 2be61868a380487439a97d987453c8c5,
+    type: 3}
   text: {fileID: 708658240}
 --- !u!4 &809039809
 Transform:
@@ -3029,8 +3031,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 871341856}
   m_HandleRect: {fileID: 871341855}
   m_Direction: 2
-  m_Value: 0.49999994
-  m_Size: 0.5867497
+  m_Value: 0.5
+  m_Size: 0.62859535
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

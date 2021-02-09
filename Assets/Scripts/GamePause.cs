@@ -103,9 +103,10 @@ public class GamePause : MonoBehaviour
 
     void SetSlider()
     {
-        newStagePanel.SetActive(true); //스테이지 깼으니까 패널 띄우고
+        //Debug.Log("새로운 스테이지 열림");
+        //newStagePanel.SetActive(true); //스테이지 깼으니까 패널 띄우고
         //Invoke("CloseNewStagePanel", 2); //2초뒤에 띄운 패널 없애고
-        slider.gameObject.SetActive(false); //슬라이더도 사라지기
+        //slider.gameObject.SetActive(false); //슬라이더도 사라지기
     }
 
     private void OnApplicationPause(bool pause)
