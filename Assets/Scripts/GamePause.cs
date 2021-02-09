@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class GamePause : MonoBehaviour
 {
+    public GameObject menuSet;
+
+    public GameObject display;
     public GameObject content;
     public Slider slider;
     public Button pauseButton;
@@ -14,27 +17,34 @@ public class GamePause : MonoBehaviour
     public GameObject coverPanel;
     public GameObject newStagePanel;
 
-    RectTransform contentRectTrans;
-    RectTransform sliderRectTrans;
-    RectTransform pauseButtonRectTrans;
-    RectTransform hairLengthPanelRectTrans;
-    RectTransform pausePanelRectTrans;
-    RectTransform coverPanelRectTrans;
-    RectTransform newStagePanelRectTrans;
+    private RectTransform displayRectTrans;
+    private RectTransform contentRectTrans;
+    private RectTransform sliderRectTrans;
+    private RectTransform pauseButtonRectTrans;
+    private RectTransform hairLengthPanelRectTrans;
+    private RectTransform pausePanelRectTrans;
+    private RectTransform coverPanelRectTrans;
+    private RectTransform newStagePanelRectTrans;
 
-    BoxCollider2D contentCollider;
-    BoxCollider2D sliderCollider;
-    BoxCollider2D pauseButtonCollider;
-    BoxCollider2D hairLengthPanelCollider;
-    BoxCollider2D pausePanelCollider;
-    BoxCollider2D coverPanelCollider;
-    BoxCollider2D newStagePanelCollider;
+    private BoxCollider2D contentCollider;
+    private BoxCollider2D sliderCollider;
+    private BoxCollider2D pauseButtonCollider;
+    private BoxCollider2D hairLengthPanelCollider;
+    private BoxCollider2D pausePanelCollider;
+    private BoxCollider2D coverPanelCollider;
+    private BoxCollider2D newStagePanelCollider;
 
+    private DataManager dataManager;
 
     public Text hairLength;
 
+    private bool bPaused = false;
+
     private void Awake()
     {
+        dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
+
+        displayRectTrans = display.GetComponent<RectTransform>();
         contentRectTrans = content.GetComponent<RectTransform>();
         sliderRectTrans = slider.GetComponent<RectTransform>();
         pauseButtonRectTrans = pauseButton.GetComponent<RectTransform>();
@@ -61,21 +71,31 @@ public class GamePause : MonoBehaviour
         if (contentRectTrans.rect.height >= 2000) //content의 높이가 특정 숫자보다 커지면
         {
             slider.gameObject.SetActive(true);  //슬라이더바가 활성화 되고
-            slider.value += Time.deltaTime*10;  //*수정필요 : 머리길이 즉, content길이 변화만큼 씩 값이 증가해야 함
+            slider.value += Time.deltaTime * 10;  //*수정필요 : 머리길이 즉, content길이 변화만큼 씩 값이 증가해야 함
 
             if (slider.value == 100)
                 SetSlider();
         }
 
+        SetCollider();
+    }
+
+    void SetCollider()
+    {
         /*콜라이더 사이즈 전부 설정*/
-        contentCollider.size = new Vector2(contentRectTrans.rect.width, contentRectTrans.rect.height);
+
+        /*content의 길이가 더 길때 이걸로 하기*///contentCollider.size = new Vector2(contentRectTrans.rect.width, contentRectTrans.rect.height);
+        contentCollider.size = new Vector2(displayRectTrans.rect.width, displayRectTrans.rect.height);
+
         sliderCollider.size = new Vector2(sliderRectTrans.rect.width, sliderRectTrans.rect.height);
-        
-        /*현재 수정중*/
-        pauseButtonCollider.offset = new Vector2(pauseButtonRectTrans.position.x, pauseButtonRectTrans.position.y);
+        sliderCollider.offset = new Vector2((-1) * sliderRectTrans.rect.width / 2, 0);
+
         pauseButtonCollider.size = new Vector2(pauseButtonRectTrans.rect.width, pauseButtonRectTrans.rect.height);
-        
+        pauseButtonCollider.offset = new Vector2(pauseButtonRectTrans.rect.width / 2, (-1) * (pauseButtonRectTrans.rect.height / 2));
+
         hairLengthPanelCollider.size = new Vector2(hairLengthPanelRectTrans.rect.width, hairLengthPanelRectTrans.rect.height);
+        hairLengthPanelCollider.offset = new Vector2((-1) * (hairLengthPanelRectTrans.rect.width / 2), (-1) * (hairLengthPanelRectTrans.rect.height / 2));
+
         pausePanelCollider.size = new Vector2(pausePanelRectTrans.rect.width, pausePanelRectTrans.rect.height);
         coverPanelCollider.size = new Vector2(coverPanelRectTrans.rect.width, coverPanelRectTrans.rect.height);
         newStagePanelCollider.size = new Vector2(newStagePanelRectTrans.rect.width, newStagePanelRectTrans.rect.height);
@@ -87,26 +107,50 @@ public class GamePause : MonoBehaviour
         //Invoke("CloseNewStagePanel", 2); //2초뒤에 띄운 패널 없애고
         slider.gameObject.SetActive(false); //슬라이더도 사라지기
     }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if(pause)
+        {
+            bPaused = true;
+            OnClickToggleMenuSetButton();
+        }
+        else
+        {
+            if (bPaused)
+            {
+                bPaused = false;
+                OnClickToggleMenuSetButton();
+            }
+        }
+    }
     void CloseNewStagePanel()
     {
         newStagePanel.SetActive(false);
     }
 
-    public void OnClickPauseButton()
+    public void OnClickToggleMenuSetButton()
     {
-        pausePanel.SetActive(!pausePanel.activeSelf);
-        coverPanel.SetActive(!coverPanel.activeSelf);
-
-    }
-
-    public void OnClickCloseButton()
-    {
-        pausePanel.SetActive(!pausePanel.activeSelf);
-        coverPanel.SetActive(!coverPanel.activeSelf);
+        
+        menuSet.SetActive(!menuSet.activeSelf);
+        
+        //pausePanel.SetActive(!pausePanel.activeSelf);
+        //coverPanel.SetActive(!coverPanel.activeSelf);
     }
 
     public void BackToMenu()
     {
         SceneManager.LoadScene("Menu Scene");
+    }
+
+    public void StageInitialize()
+    {
+        dataManager.InitiateClickCount(dataManager.currentStage);
+        dataManager.Save();
+    }
+
+    public void GameExit()
+    {
+        Application.Quit();
     }
 }

@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-
-[System.Serializable]
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class DataManager : MonoBehaviour
 {
@@ -16,7 +15,6 @@ public class DataManager : MonoBehaviour
     public int currentGender;//0이면 아직 게임진행 x
     void Awake()
     {
-        //Debug.Log("1");
         if(dataManager != null)
         {
             Destroy(this.gameObject);
@@ -28,69 +26,79 @@ public class DataManager : MonoBehaviour
     }
     void Start()
     {
-        //Debug.Log("2");
         ManageSaveFile();
     }
-    
+
+    public static void SaveFile(GameData data)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath+ "/GameData.nobody";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        GameData savingData = new GameData(data);
+
+        formatter.Serialize(stream, savingData);
+        stream.Close();
+    }
+    public static GameData LoadFile()
+    {
+        string path = Application.persistentDataPath + "/GameData.nobody";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            GameData loadData = formatter.Deserialize(stream) as GameData;
+            stream.Close();
+
+            return loadData;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
     void ManageSaveFile()
     {
-        //세이브 파일 있는지 확인
-        if (FindSaveFile())
-             LoadSaveFile();//있으면 로드
+        data = LoadFile();
+        if (data == null)
+        {
+            FirstSaveFile();
+            Save();
+        }
         else
-            MakeSaveFile();//없으면 초기 세이브 파일 생성
-    }
+            Debug.Log("세이브 파일 로드");
 
-    bool FindSaveFile()
-    {
-        //Debug.Log(File.Exists(Application.dataPath + "/GameData.json"));
-        return File.Exists(Application.dataPath + "/GameData.json");
     }
-    void MakeSaveFile()
+    public void Save()
     {
-        Debug.Log("세이브 파일 생성중");
+        SaveFile(data);
+    }
+    void FirstSaveFile()
+    {
+        Debug.Log("처음 세이브 파일 생성");
 
         data = new GameData();
-        data.stageCount = 8; //스테이지 개수
-        data.stageActivate = new int[data.stageCount];
-        data.gender = new int[data.stageCount];
-        data.clickCount = new int[data.stageCount];
-
-        for(int i=0;i<data.stageCount;i++)
+        for (int i = 0; i < data.stageCount; i++)
         {
             InitiateStage(i);
         }
         data.stageActivate[0] = 1; //default값인 1번째 스테이지 오픈
         data.gender[7] = 3;
+   }
 
-        //안드로이드는 이걸로 바꿔야 됨
-        //Application.persistentDataPath
-        File.WriteAllText(Application.dataPath + "/GameData.json", JsonUtility.ToJson(data,true));
-    }
-    void LoadSaveFile()
-    {
-        string path = File.ReadAllText(Application.dataPath + "/GameData.json");
-        data = JsonUtility.FromJson<GameData>(path);
-    }
-
-    void InitiateStage(int stageNum)//스테이지 초기화
+    public void InitiateStage(int stageNum)//스테이지 초기화
     {
         data.stageActivate[stageNum] = 0;
         data.gender[stageNum] = 0;
         data.clickCount[stageNum] = 0;
     }
 
-    public void SaveFile()
+    public void InitiateClickCount(int stageNum)//스테이지 초기화
     {
-        File.WriteAllText(Application.dataPath + "/GameData.json", JsonUtility.ToJson(data, true));
+        data.clickCount[stageNum] = 0;
     }
-    void SaveStage()//스테이지의 성별,클릭수 저장
-    {
-        data.clickCount[dataManager.currentStage] = dataManager.currentClickCount;
-        data.gender[dataManager.currentStage] = dataManager.currentGender;
-    }
-    void SaveStageActivation()//스테이지 활성화하기
-    {
-        data.stageActivate[dataManager.currentStage] = 1;
-    }
+
 }
