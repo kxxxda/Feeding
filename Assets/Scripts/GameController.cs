@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public GameObject testingSpritePrefab;
+    public Transform parentTransform;
+    public Text text;
 
     private Camera mainCamera;
     private DataManager dataManager;
@@ -14,9 +16,7 @@ public class GameController : MonoBehaviour
     private Touch tempTouchs;
     private Vector2 touchPos;
     private bool touchOn;
-    public Text text;
-
-    private int countLimit;
+    
 
     private void Awake()
     {
@@ -25,7 +25,6 @@ public class GameController : MonoBehaviour
         objectManager = GameObject.Find("Object Manager").GetComponent<ObjectManager>();
         scrollRect = GameObject.Find("Scroll View").GetComponent<ScrollRect>();
 
-        countLimit = 10; //초기값은 10
     }
 
     private void Update()
@@ -68,7 +67,7 @@ public class GameController : MonoBehaviour
             mousePosition = mainCamera.ScreenToWorldPoint(mousePosition);
 
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, mainCamera.transform.forward);
-            if (hit.collider!=null)
+            if (hit.collider != null)
             {
                 text.text = hit.collider.name;
                 Debug.Log(hit.collider.name);
@@ -78,14 +77,7 @@ public class GameController : MonoBehaviour
                     dataManager.Save();
 
                     SprayControl(mousePosition);
-
-                    if (dataManager.data.clickCount[dataManager.currentStage] == countLimit)
-                    { //현재 스테이지의 클릭 수가 50을 넘으면
-                        SpriteControl(mousePosition);
-                        dataManager.data.clickCount[dataManager.currentStage] = 0; //현재 스테이지의 클릭 수 0으로 초기화
-                        countLimit += 0; //기준 클릭수 두배로 증가
-                    }
-
+                    SpriteControl();
 
                 }
 
@@ -102,12 +94,15 @@ public class GameController : MonoBehaviour
         HairSpray h = hairSpray.GetComponent<HairSpray>();
         h.StartSpray();
     }
-    void SpriteControl(Vector2 pos)
+    void SpriteControl()
     {
-        Debug.Log("스프라이트 생성");
-        //GameObject testingSprite = Instantiate(testingSpritePrefab, scrollRect.content.position, scrollRect.content.rotation);
-        GameObject testingSprite = Instantiate(Resources.Load<GameObject>("Prefabs/TestingSprite"), scrollRect.content.transform);
+        if (dataManager.data.clickCount[dataManager.currentStage] < 10) //아무 일도 일어나지 않음
+            return;
+        //else if (dataManager.data.clickCount[dataManager.currentStage] < 20) //이때 생성될 프리팹 이미지 변경?
 
+
+        GameObject testingSprite = Instantiate(testingSpritePrefab);
+        testingSprite.transform.SetParent(parentTransform.transform); 
     }
 
 }

@@ -10,7 +10,7 @@ public class GamePause : MonoBehaviour
 
     public GameObject display;
     public GameObject content;
-    public Slider slider;
+    public Slider progressBar;
     public Button pauseButton;
     public GameObject hairLengthPanel;
     public GameObject pausePanel;
@@ -19,7 +19,7 @@ public class GamePause : MonoBehaviour
 
     private RectTransform displayRectTrans;
     private RectTransform contentRectTrans;
-    private RectTransform sliderRectTrans;
+    private RectTransform progressBarRectTrans;
     private RectTransform pauseButtonRectTrans;
     private RectTransform hairLengthPanelRectTrans;
     private RectTransform pausePanelRectTrans;
@@ -46,7 +46,7 @@ public class GamePause : MonoBehaviour
 
         displayRectTrans = display.GetComponent<RectTransform>();
         contentRectTrans = content.GetComponent<RectTransform>();
-        sliderRectTrans = slider.GetComponent<RectTransform>();
+        progressBarRectTrans = progressBar.GetComponent<RectTransform>();
         pauseButtonRectTrans = pauseButton.GetComponent<RectTransform>();
         hairLengthPanelRectTrans = hairLengthPanel.GetComponent<RectTransform>();
         pausePanelRectTrans = pausePanel.GetComponent<RectTransform>();
@@ -54,7 +54,7 @@ public class GamePause : MonoBehaviour
         newStagePanelRectTrans = newStagePanel.GetComponent<RectTransform>();
 
         contentCollider = content.GetComponent<BoxCollider2D>();
-        sliderCollider = slider.GetComponent<BoxCollider2D>();
+        sliderCollider = progressBar.GetComponent<BoxCollider2D>();
         pauseButtonCollider = pauseButton.GetComponent<BoxCollider2D>();
         hairLengthPanelCollider = hairLengthPanel.GetComponent<BoxCollider2D>();
         pausePanelCollider = pausePanel.GetComponent<BoxCollider2D>();
@@ -68,13 +68,12 @@ public class GamePause : MonoBehaviour
         hairLength.text = contentRectTrans.rect.height.ToString() + " M"; //근데 콘텐트의 길이가 머리 길이가 되어서는 안됨 *수정필요
         //Debug.Log(contentRectTrans.rect.height);
 
-        if (contentRectTrans.rect.height >= 2000) //content의 높이가 특정 숫자보다 커지면
+        if (contentRectTrans.rect.height >= 800) //content의 높이가 특정 숫자보다 커지면
         {
-            slider.gameObject.SetActive(true);  //슬라이더바가 활성화 되고
-            slider.value += Time.deltaTime * 10;  //*수정필요 : 머리길이 즉, content길이 변화만큼 씩 값이 증가해야 함
+            progressBar.value += Time.deltaTime * 10;  //*수정필요 : 머리길이 즉, content길이 변화만큼 씩 값이 증가해야 함
 
-            if (slider.value == 100)
-                SetSlider();
+            if (progressBar.value == 100)
+                SliderFull();
         }
 
         SetCollider();
@@ -87,8 +86,8 @@ public class GamePause : MonoBehaviour
         /*content의 길이가 더 길때 이걸로 하기*///contentCollider.size = new Vector2(contentRectTrans.rect.width, contentRectTrans.rect.height);
         contentCollider.size = new Vector2(displayRectTrans.rect.width, displayRectTrans.rect.height);
 
-        sliderCollider.size = new Vector2(sliderRectTrans.rect.width, sliderRectTrans.rect.height);
-        sliderCollider.offset = new Vector2((-1) * sliderRectTrans.rect.width / 2, 0);
+        sliderCollider.size = new Vector2(progressBarRectTrans.rect.width, progressBarRectTrans.rect.height);
+        sliderCollider.offset = new Vector2((-1) * progressBarRectTrans.rect.width / 2, 0);
 
         pauseButtonCollider.size = new Vector2(pauseButtonRectTrans.rect.width, pauseButtonRectTrans.rect.height);
         pauseButtonCollider.offset = new Vector2(pauseButtonRectTrans.rect.width / 2, (-1) * (pauseButtonRectTrans.rect.height / 2));
@@ -101,7 +100,7 @@ public class GamePause : MonoBehaviour
         newStagePanelCollider.size = new Vector2(newStagePanelRectTrans.rect.width, newStagePanelRectTrans.rect.height);
     }
 
-    void SetSlider()
+    void SliderFull()
     {
         //Debug.Log("새로운 스테이지 열림");
         //newStagePanel.SetActive(true); //스테이지 깼으니까 패널 띄우고
