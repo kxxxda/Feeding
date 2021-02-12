@@ -60,6 +60,9 @@ public class GamePause : MonoBehaviour
         pausePanelCollider = pausePanel.GetComponent<BoxCollider2D>();
         coverPanelCollider = coverPanel.GetComponent<BoxCollider2D>();
         newStagePanelCollider = newStagePanel.GetComponent<BoxCollider2D>();
+
+        progressBar.maxValue = 50;
+
     }
 
 
@@ -68,14 +71,12 @@ public class GamePause : MonoBehaviour
         hairLength.text = contentRectTrans.rect.height.ToString() + " M"; //근데 콘텐트의 길이가 머리 길이가 되어서는 안됨 *수정필요
         //Debug.Log(contentRectTrans.rect.height);
 
-        if (contentRectTrans.rect.height >= 800) //content의 높이가 특정 숫자보다 커지면
-        {
-            progressBar.value += Time.deltaTime * 10;  //*수정필요 : 머리길이 즉, content길이 변화만큼 씩 값이 증가해야 함
+       
+        progressBar.value = dataManager.data.clickCount[dataManager.currentStage] *0.1f;  //*수정필요 : 머리길이 즉, content길이 변화만큼 씩 값이 증가해야 함
 
             if (progressBar.value == 100)
                 SliderFull();
-        }
-
+        
         SetCollider();
     }
 
@@ -83,8 +84,11 @@ public class GamePause : MonoBehaviour
     {
         /*콜라이더 사이즈 전부 설정*/
 
-        /*content의 길이가 더 길때 이걸로 하기*///contentCollider.size = new Vector2(contentRectTrans.rect.width, contentRectTrans.rect.height);
-        contentCollider.size = new Vector2(displayRectTrans.rect.width, displayRectTrans.rect.height);
+        /*content의 길이가 더 길때 이걸로 하기*/
+        if(contentRectTrans.rect.height > displayRectTrans.rect.height)
+            contentCollider.size = new Vector2(contentRectTrans.rect.width, contentRectTrans.rect.height);
+        else
+            contentCollider.size = new Vector2(displayRectTrans.rect.width, displayRectTrans.rect.height);
 
         sliderCollider.size = new Vector2(progressBarRectTrans.rect.width, progressBarRectTrans.rect.height);
         sliderCollider.offset = new Vector2((-1) * progressBarRectTrans.rect.width / 2, 0);

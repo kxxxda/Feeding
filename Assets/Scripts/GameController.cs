@@ -112,5 +112,14 @@ public class GameController : MonoBehaviour
         GameObject testingBackground2Sprite = Instantiate(testingBackgroundSpritePrefab);
         testingBackground2Sprite.transform.SetParent(parent2Transform.transform);
     }
+    void InstantiateObject(int num)
+    {
+        for(int i = 0;i< num;i++)
+        {
+            GameObject testingSprite = Instantiate(testingSpritePrefab);
+            testingSprite.transform.SetParent(parent1Transform.transform);
+        }
+    }
 
+   
 }
