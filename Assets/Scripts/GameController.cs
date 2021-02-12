@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public GameObject testingSpritePrefab;
-    public Transform parentTransform;
+    public GameObject testingBackgroundSpritePrefab;
+    public Transform parent1Transform;
+    public Transform parent2Transform;
     public Text text;
 
     private Camera mainCamera;
@@ -71,7 +73,7 @@ public class GameController : MonoBehaviour
             {
                 text.text = hit.collider.name;
                 Debug.Log(hit.collider.name);
-                if (hit.collider.name == "Content")
+                if (hit.collider.name == "Content 1" || hit.collider.name == "Content 2")
                 {
                     dataManager.data.clickCount[dataManager.currentStage] += 1;
                     dataManager.Save();
@@ -102,7 +104,13 @@ public class GameController : MonoBehaviour
 
 
         GameObject testingSprite = Instantiate(testingSpritePrefab);
-        testingSprite.transform.SetParent(parentTransform.transform); 
+        testingSprite.transform.SetParent(parent1Transform.transform);
+
+        GameObject testingBackground1Sprite = Instantiate(testingBackgroundSpritePrefab);
+        testingBackground1Sprite.transform.SetParent(parent1Transform.transform);
+
+        GameObject testingBackground2Sprite = Instantiate(testingBackgroundSpritePrefab);
+        testingBackground2Sprite.transform.SetParent(parent2Transform.transform);
     }
 
 }
