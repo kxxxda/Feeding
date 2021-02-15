@@ -103,14 +103,21 @@ public class GameController : MonoBehaviour
         //else if (dataManager.data.clickCount[dataManager.currentStage] < 20) //이때 생성될 프리팹 이미지 변경?
 
 
-        GameObject testingSprite = Instantiate(testingSpritePrefab);
-        testingSprite.transform.SetParent(parent1Transform.transform);
+
 
         GameObject testingBackground1Sprite = Instantiate(testingBackgroundSpritePrefab);
         testingBackground1Sprite.transform.SetParent(parent1Transform.transform);
 
+        GameObject testingSprite1 = Instantiate(testingSpritePrefab);
+        testingSprite1.transform.SetParent(parent1Transform.transform);
+
+
         GameObject testingBackground2Sprite = Instantiate(testingBackgroundSpritePrefab);
         testingBackground2Sprite.transform.SetParent(parent2Transform.transform);
+
+        GameObject testingSprite2 = Instantiate(testingSpritePrefab);
+        testingSprite2.transform.SetParent(parent2Transform.transform);
+
     }
     void InstantiateObject(int num)
     {
