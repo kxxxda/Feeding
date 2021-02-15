@@ -65,8 +65,10 @@ public class HairSelection : MonoBehaviour
         }
         else //(나중에) 세이브 파일이 있다면 로드하기
         {
+            Debug.Log("이거지 이거야");
             dataManager.currentGender = dataManager.data.gender[dataManager.currentStage];
             dataManager.currentClickCount = dataManager.data.clickCount[dataManager.currentStage];
+            dataManager.currentClickStage = dataManager.data.clickStage[dataManager.currentStage];
             OnClickStartButton();
         }
 

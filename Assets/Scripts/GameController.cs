@@ -18,18 +18,34 @@ public class GameController : MonoBehaviour
     private Touch tempTouchs;
     private Vector2 touchPos;
     private bool touchOn;
-    
+    private int maxClick;
 
     private void Awake()
     {
+        //Debug.Log("Game Controller Awake");
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
         objectManager = GameObject.Find("Object Manager").GetComponent<ObjectManager>();
         scrollRect = GameObject.Find("Scroll View").GetComponent<ScrollRect>();
 
+        maxClick = 10;//스테이지간 클릭 간격 조절
+
+        FirstSpriteControl();
     }
 
     private void Update()
+    {
+        // # 스프레이 뿌리기 애니 + 클릭수 증가
+        TouchEvent();
+
+        // # 클릭수에 따른 스프라이트 관리 
+        SpriteControl();
+
+        // # 스테이지 클리어 관리
+        StageControl();
+    }
+
+    void TouchEvent()
     {
         //터치 시에
         //touchOn = false;
@@ -72,15 +88,13 @@ public class GameController : MonoBehaviour
             if (hit.collider != null)
             {
                 text.text = hit.collider.name;
-                Debug.Log(hit.collider.name);
+                //Debug.Log(hit.collider.name);
                 if (hit.collider.name == "Content 1" || hit.collider.name == "Content 2")
                 {
                     dataManager.data.clickCount[dataManager.currentStage] += 1;
                     dataManager.Save();
 
                     SprayControl(mousePosition);
-                    SpriteControl();
-
                 }
 
             }
@@ -96,7 +110,33 @@ public class GameController : MonoBehaviour
         HairSpray h = hairSpray.GetComponent<HairSpray>();
         h.StartSpray();
     }
+
+    void FirstSpriteControl()
+    {
+        for (int i = 1; i < dataManager.data.clickStage[dataManager.currentStage]; i++)
+            InstantiateObject();
+    }
     void SpriteControl()
+    {
+        int clickCount = dataManager.data.clickCount[dataManager.currentStage];
+        int clickStage = dataManager.data.clickStage[dataManager.currentStage];
+        int maxCount = maxClick* clickStage;
+
+        //Debug.Log("스테이지 : " +dataManager.currentClickStage);
+        //Debug.Log("현재 클릭수 : " +clickCount);
+        //Debug.Log("한계 : " + maxClick);
+
+        if (clickCount < maxCount) //아무 일도 일어나지 않음
+            return;
+        else if (clickCount >= maxCount) //이때 생성될 프리팹 이미지 변경?
+        {
+            Debug.Log("생성");
+            InstantiateObject();
+            dataManager.data.clickStage[dataManager.currentStage]++;
+        }
+    }
+
+    void InstantiateObject()
     {
         if (dataManager.data.clickCount[dataManager.currentStage] < 10) //아무 일도 일어나지 않음
             return;
@@ -119,14 +159,11 @@ public class GameController : MonoBehaviour
         testingSprite2.transform.SetParent(parent2Transform.transform);
 
     }
-    void InstantiateObject(int num)
-    {
-        for(int i = 0;i< num;i++)
-        {
-            GameObject testingSprite = Instantiate(testingSpritePrefab);
-            testingSprite.transform.SetParent(parent1Transform.transform);
-        }
-    }
 
-   
+    void StageControl()
+    {
+        //해금 이벤트 처리 
+        if (dataManager.data.clickStage[dataManager.currentStage] == 50) ;
+
+    }
 }

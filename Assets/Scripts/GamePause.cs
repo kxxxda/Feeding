@@ -112,7 +112,7 @@ public class GamePause : MonoBehaviour
         //slider.gameObject.SetActive(false); //슬라이더도 사라지기
     }
 
-    private void OnApplicationPause(bool pause)
+    private void OnApplicationPause(bool pause)//일시정지 기능
     {
         if(pause)
         {
