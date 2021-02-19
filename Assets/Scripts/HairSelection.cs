@@ -65,7 +65,7 @@ public class HairSelection : MonoBehaviour
         }
         else //(나중에) 세이브 파일이 있다면 로드하기
         {
-            Debug.Log("이거지 이거야");
+            //Debug.Log("이거지 이거야");
             dataManager.currentGender = dataManager.data.gender[dataManager.currentStage];
             dataManager.currentClickCount = dataManager.data.clickCount[dataManager.currentStage];
             dataManager.currentClickStage = dataManager.data.clickStage[dataManager.currentStage];
@@ -118,7 +118,7 @@ public class HairSelection : MonoBehaviour
     public void OnClickStartButton()
     {
         dataManager.data.gender[dataManager.currentStage] = dataManager.currentGender;//data에 현재 젠더 저장하면서 넘어가기
-        SceneManager.LoadScene("Game Scene");
+        SceneManager.LoadScene("Game Scene test");
     }
     public void OnClickBackButton() 
     {

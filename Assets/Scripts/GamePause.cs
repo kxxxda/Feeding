@@ -40,6 +40,8 @@ public class GamePause : MonoBehaviour
 
     private bool bPaused = false;
 
+    private bool isPanelOpened=false;
+
     private void Awake()
     {
         dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
@@ -68,16 +70,19 @@ public class GamePause : MonoBehaviour
 
     private void Update()
     {
-        hairLength.text = contentRectTrans.rect.height.ToString() + " M"; //근데 콘텐트의 길이가 머리 길이가 되어서는 안됨 *수정필요
+        hairLength.text = dataManager.data.clickStage[dataManager.currentStage].ToString() + " M"; //근데 콘텐트의 길이가 머리 길이가 되어서는 안됨 *수정필요
         //Debug.Log(contentRectTrans.rect.height);
 
        
-        progressBar.value = dataManager.data.clickCount[dataManager.currentStage] *0.1f;  //*수정필요 : 머리길이 즉, content길이 변화만큼 씩 값이 증가해야 함
+        progressBar.value = dataManager.data.clickStage[dataManager.currentStage];  //*수정필요 : 머리길이 즉, content길이 변화만큼 씩 값이 증가해야 함
 
-            if (progressBar.value == 100)
-                SliderFull();
+        if (progressBar.value == 50&&!isPanelOpened)
+        {
+            SliderFull();
+            isPanelOpened = true;
+        }
         
-        SetCollider();
+       SetCollider();
     }
 
     void SetCollider()
@@ -102,14 +107,15 @@ public class GamePause : MonoBehaviour
         pausePanelCollider.size = new Vector2(pausePanelRectTrans.rect.width, pausePanelRectTrans.rect.height);
         coverPanelCollider.size = new Vector2(coverPanelRectTrans.rect.width, coverPanelRectTrans.rect.height);
         newStagePanelCollider.size = new Vector2(newStagePanelRectTrans.rect.width, newStagePanelRectTrans.rect.height);
+
     }
 
     void SliderFull()
     {
-        //Debug.Log("새로운 스테이지 열림");
-        //newStagePanel.SetActive(true); //스테이지 깼으니까 패널 띄우고
-        //Invoke("CloseNewStagePanel", 2); //2초뒤에 띄운 패널 없애고
-        //slider.gameObject.SetActive(false); //슬라이더도 사라지기
+        Debug.Log("새로운 스테이지 열림");
+        newStagePanel.SetActive(true); //스테이지 깼으니까 패널 띄우고
+        Invoke("CloseNewStagePanel", 2); //2초뒤에 띄운 패널 없애고
+        progressBar.gameObject.SetActive(false); //슬라이더도 사라지기
     }
 
     private void OnApplicationPause(bool pause)//일시정지 기능
