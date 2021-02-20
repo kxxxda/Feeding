@@ -73,7 +73,7 @@ public class GamePause : MonoBehaviour
 
 
         progressBar_Fill.fillAmount = dataManager.data.clickStage[dataManager.currentStage] / 100f;  //클릭수 받아오기
-        Debug.Log("현재 프로그레스바 값은 : " + progressBar_Fill.fillAmount + " 받아온값은 : " + dataManager.data.clickStage[dataManager.currentStage] / 100f);
+        //Debug.Log("현재 프로그레스바 값은 : " + progressBar_Fill.fillAmount + " 받아온값은 : " + dataManager.data.clickStage[dataManager.currentStage] / 100f);
 
         if (progressBar_Fill.fillAmount == 1 && !isPanelOpened)
         {

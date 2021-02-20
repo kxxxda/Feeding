@@ -97,10 +97,6 @@ public class GameController : MonoBehaviour
         
     }
 
-    public void pleeaaase()
-    {
-        Debug.Log("젠장 믿는다구");
-    }
     void TouchEvent()
     {
         //터치 시에
@@ -120,7 +116,7 @@ public class GameController : MonoBehaviour
         //            text.text = hit.collider.name + dataManager.data.clickCount[dataManager.currentStage];
 
 
-        //            if (hit.collider.name == "Content")
+        //            if (hit.collider.name == "GameSprite")
         //            {
         //                dataManager.data.clickCount[dataManager.currentStage] += 1;
         //                dataManager.Save();
@@ -145,8 +141,12 @@ public class GameController : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(mousePosition, mainCamera.transform.forward);
                 if (hit.collider != null)
                 {
-                    //text.text = hit.collider.name;
+                    /*디버깅용*/
+                    text.text = hit.collider.name;
                     Debug.Log(hit.collider.name);
+                    /*디버깅용*/
+
+
                     if (hit.collider.name == "GameSprite")
                     {
                         dataManager.data.clickCount[dataManager.currentStage] += 1;
