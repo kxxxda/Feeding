@@ -7,15 +7,15 @@ using UnityEngine.UI;
 public class GamePause : MonoBehaviour
 {
     public GameObject menuSet;
-
     public GameObject display;
     public GameObject content;
-    public Slider progressBar;
-    public Button pauseButton;
     public GameObject hairLengthPanel;
     public GameObject pausePanel;
     public GameObject coverPanel;
     public GameObject newStagePanel;
+    public Image progressBar;
+    public Image progressBar_Fill;
+    public Button pauseButton;
 
     private RectTransform displayRectTrans;
     private RectTransform contentRectTrans;
@@ -40,7 +40,7 @@ public class GamePause : MonoBehaviour
 
     private bool bPaused = false;
 
-    private bool isPanelOpened=false;
+    private bool isPanelOpened = false;
 
     private void Awake()
     {
@@ -63,26 +63,25 @@ public class GamePause : MonoBehaviour
         coverPanelCollider = coverPanel.GetComponent<BoxCollider2D>();
         newStagePanelCollider = newStagePanel.GetComponent<BoxCollider2D>();
 
-        progressBar.maxValue = 50;
-
     }
 
 
     private void Update()
     {
         hairLength.text = dataManager.data.clickStage[dataManager.currentStage].ToString() + " M"; //근데 콘텐트의 길이가 머리 길이가 되어서는 안됨 *수정필요
-        //Debug.Log(contentRectTrans.rect.height);
+                                                                                                   //Debug.Log(contentRectTrans.rect.height);
 
-       
-        progressBar.value = dataManager.data.clickStage[dataManager.currentStage];  //*수정필요 : 머리길이 즉, content길이 변화만큼 씩 값이 증가해야 함
 
-        if (progressBar.value == 50&&!isPanelOpened)
+        progressBar_Fill.fillAmount = dataManager.data.clickStage[dataManager.currentStage] / 100f;  //클릭수 받아오기
+        Debug.Log("현재 프로그레스바 값은 : " + progressBar_Fill.fillAmount + " 받아온값은 : " + dataManager.data.clickStage[dataManager.currentStage] / 100f);
+
+        if (progressBar_Fill.fillAmount == 1 && !isPanelOpened)
         {
             SliderFull();
             isPanelOpened = true;
         }
-        
-       SetCollider();
+
+        SetCollider();
     }
 
     void SetCollider()
@@ -90,7 +89,7 @@ public class GamePause : MonoBehaviour
         /*콜라이더 사이즈 전부 설정*/
 
         /*content의 길이가 더 길때 이걸로 하기*/
-        if(contentRectTrans.rect.height > displayRectTrans.rect.height)
+        if (contentRectTrans.rect.height > displayRectTrans.rect.height)
             contentCollider.size = new Vector2(contentRectTrans.rect.width, contentRectTrans.rect.height);
         else
             contentCollider.size = new Vector2(displayRectTrans.rect.width, displayRectTrans.rect.height);
@@ -115,12 +114,12 @@ public class GamePause : MonoBehaviour
         Debug.Log("새로운 스테이지 열림");
         newStagePanel.SetActive(true); //스테이지 깼으니까 패널 띄우고
         Invoke("CloseNewStagePanel", 2); //2초뒤에 띄운 패널 없애고
-        progressBar.gameObject.SetActive(false); //슬라이더도 사라지기
+        progressBar.gameObject.SetActive(false);
     }
 
     private void OnApplicationPause(bool pause)//일시정지 기능
     {
-        if(pause)
+        if (pause)
         {
             bPaused = true;
             OnClickToggleMenuSetButton();
@@ -141,9 +140,9 @@ public class GamePause : MonoBehaviour
 
     public void OnClickToggleMenuSetButton()
     {
-        
+
         menuSet.SetActive(!menuSet.activeSelf);
-        
+
         //pausePanel.SetActive(!pausePanel.activeSelf);
         //coverPanel.SetActive(!coverPanel.activeSelf);
     }
