@@ -6,10 +6,9 @@ using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject testingSpritePrefab;
-    public GameObject testingBackgroundSpritePrefab;
-    public Transform parent1Transform;
-    //public Transform parent2Transform;
+    public GameObject hairParent;
+    public GameObject[] hairSpritePrefabs;
+    public int index1;
     public Text text;
 
     private Camera mainCamera;
@@ -22,9 +21,13 @@ public class GameController : MonoBehaviour
     private int maxClick;
     private bool isViewport;
 
+    GameObject[] hairSprites;
+
     private void Awake()
     {
         //Debug.Log("Game Controller Awake");
+        hairSprites = new GameObject[4];
+
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
         objectManager = GameObject.Find("Object Manager").GetComponent<ObjectManager>();
@@ -32,7 +35,8 @@ public class GameController : MonoBehaviour
 
         maxClick = 10;//스테이지간 클릭 간격 조절
 
-        FirstSpriteControl();
+        Generate();
+        //FirstSpriteControl();
     }
 
     private void Update()
@@ -46,6 +50,14 @@ public class GameController : MonoBehaviour
         // # 클릭수에 따른 스프라이트 관리 
         SpriteControl();
 
+    }
+
+    void Generate()
+    {
+        for (int index = 0; index < hairSpritePrefabs.Length; index++) { //우선만들어놓기
+            hairSprites[index] = Instantiate(hairSpritePrefabs[index]);
+            hairSprites[index].SetActive(false);
+        }
     }
 
     void MobileTouch()
@@ -170,11 +182,11 @@ public class GameController : MonoBehaviour
         h.StartSpray();
     }
 
-    void FirstSpriteControl()
-    {
-        for (int i = 1; i < dataManager.data.clickStage[dataManager.currentStage]; i++)
-            InstantiateObject();
-    }
+    //void FirstSpriteControl()
+    //{
+    //    for (int i = 1; i < dataManager.data.clickStage[dataManager.currentStage]; i++)
+    //        InstantiateObject();
+    //}
     void SpriteControl()
     {
         int clickCount = dataManager.data.clickCount[dataManager.currentStage];
@@ -185,6 +197,7 @@ public class GameController : MonoBehaviour
         //Debug.Log("현재 클릭수 : " +clickCount);
         //Debug.Log("한계 : " + maxClick);
 
+        //Debug.Log("clickCount : " + clickCount + " maxCount : " + maxCount);
         if (clickCount < maxCount) //아무 일도 일어나지 않음
             return;
         else if (clickCount >= maxCount) //이때 생성될 프리팹 이미지 변경?
@@ -199,19 +212,23 @@ public class GameController : MonoBehaviour
 
     void InstantiateObject()
     {
-        GameObject testingBackground1Sprite = Instantiate(testingBackgroundSpritePrefab);
-        testingBackground1Sprite.transform.SetParent(parent1Transform.transform);
-
-        GameObject testingSprite1 = Instantiate(testingSpritePrefab);
-        testingSprite1.transform.SetParent(parent1Transform.transform);
+        Debug.Log("머리 생성합니다.");
+        hairSprites[index1].transform.SetParent(hairParent.transform); //hierarchy 창에서 위치 설정
 
 
-        //GameObject testingBackground2Sprite = Instantiate(testingBackgroundSpritePrefab);
-        //testingBackground2Sprite.transform.SetParent(parent2Transform.transform);
+        RectTransform rc = hairSprites[index1].GetComponent<RectTransform>();
+        rc.localScale = new Vector3(1, 1, 1); //scale 1로 설정
 
-        //GameObject testingSprite2 = Instantiate(testingSpritePrefab);
-        //testingSprite2.transform.SetParent(parent2Transform.transform);
+        if (index1 != 0) {
+            hairSprites[index1 - 1].SetActive(false); //이전 스프라이트는 비활성화
+            Debug.Log("인덱스 " + index1 + "-1 비활성화했음");
+        }
+           
 
+        hairSprites[index1].SetActive(true); //새로운 스프라이트 활성화
+        Debug.Log("인덱스 " + index1 + " 활성화했음");
+
+        index1++;
     }
 
     
