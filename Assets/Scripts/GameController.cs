@@ -23,6 +23,10 @@ public class GameController : MonoBehaviour
 
     GameObject[] hairSprites;
 
+
+    private Vector2 nowPos, prePos;
+    private Vector3 movePos;
+    private float Speed = 0.25f;
     private void Awake()
     {
         //Debug.Log("Game Controller Awake");
@@ -42,10 +46,10 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         isViewport = false;
-        //콜라이더가 아닌 다른 방법으로 해결함
-        TouchEvent();
-
-        MobileTouch();
+        
+        // # 터치 이벤트 
+        //PCTouchEvent();
+        MobileTouchEvent();
 
         // # 클릭수에 따른 스프라이트 관리 
         SpriteControl();
@@ -60,114 +64,84 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void MobileTouch()
+    
+    void MobileTouchEvent()
     {
-        //터치 시에.
+        //터치 시에
         touchOn = false;
         if (Input.touchCount > 0)
         {
             for (int i = 0; i < Input.touchCount; i++)
             {
-                tempTouchs = Input.GetTouch(i);
-                if (tempTouchs.phase == TouchPhase.Began)
+                if (!EventSystem.current.IsPointerOverGameObject(i))
                 {
-                    touchPos = mainCamera.ScreenToWorldPoint(tempTouchs.position);
-                    touchOn = true;
+                    tempTouchs = Input.GetTouch(i);
+                    if (tempTouchs.phase == TouchPhase.Began)
+                    {
+                        touchPos = mainCamera.ScreenToWorldPoint(tempTouchs.position);
+                        touchOn = true;
 
-                    RaycastHit2D hit = Physics2D.Raycast(touchPos, mainCamera.transform.forward);
-                    text.text = dataManager.data.clickCount[dataManager.currentStage].ToString();
+                        prePos = tempTouchs.position - tempTouchs.deltaPosition;
 
-                    dataManager.data.clickCount[dataManager.currentStage] += 1;
-                    dataManager.Save();
-                    SprayControl(touchPos);
+                        dataManager.data.clickCount[dataManager.currentStage] += 1;
+                        dataManager.Save();
 
+                        SprayControl(touchPos);
+                        
+                        //레이캐스트로 터치 
+                        //RaycastHit2D hit = Physics2D.Raycast(touchPos, mainCamera.transform.forward);
+                        //text.text = hit.collider.name + dataManager.data.clickCount[dataManager.currentStage];
+                        //if (hit.collider != null&&hit.collider.name == "GameSprite")
+                    }
+                    //else if (tempTouchs.phase == TouchPhase.Moved)
+                    //{
+                    //    nowPos = tempTouchs.position - tempTouchs.deltaPosition;
+                    //    movePos = (Vector3)(prePos - nowPos);
+                    //    movePos.z = -50;
+                    //    movePos.x = 0;
+                    //    //if (movePos.y > 20)
+                    //    //    movePos.y = 20;
+                    //    //if (movePos.y < 0)
+                    //    //    movePos.y = 0;
+                    //    movePos *= Time.deltaTime * Speed;
+                    //    mainCamera.transform.Translate(movePos);
+                    //    prePos = tempTouchs.position - tempTouchs.deltaPosition;
+                    //}
                 }
-
             }
         }
+
     }
 
-    // # 스프레이 뿌리기 애니 + 클릭수 증가
-    public void ppTouchEvent()//트리거로 돌아가는 함수
+    void PCTouchEvent()
     {
-        isViewport = true;
-
-        Debug.Log("바꾸면 다시 하지 ");
-        Vector2 mousePosition = Input.mousePosition;
-        mousePosition = mainCamera.ScreenToWorldPoint(mousePosition);
-
-        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-
-        if (hit.collider!=null)
-            Debug.Log(hit.collider.name);
-            //if (hit.collider.name == "Content 1" || hit.collider.name == "Content 2")
-
-            dataManager.data.clickCount[dataManager.currentStage] += 1;
-                dataManager.Save();
-
-                SprayControl(mousePosition);
-        
-    }
-
-    void TouchEvent()
-    {
-        //터치 시에
-        //touchOn = false;
-        //if (Input.touchCount > 0)
-        //{
-        //    for (int i = 0; i < Input.touchCount; i++)
-        //    {
-
-        //        tempTouchs = Input.GetTouch(i);
-        //        if (tempTouchs.phase == TouchPhase.Began)
-        //        {
-        //            touchPos = mainCamera.ScreenToWorldPoint(tempTouchs.position);
-        //            touchOn = true;
-
-        //            RaycastHit2D hit = Physics2D.Raycast(touchPos, mainCamera.transform.forward);
-        //            text.text = hit.collider.name + dataManager.data.clickCount[dataManager.currentStage];
-
-
-        //            if (hit.collider.name == "GameSprite")
-        //            {
-        //                dataManager.data.clickCount[dataManager.currentStage] += 1;
-        //                dataManager.Save();
-
-        //                SprayControl(touchPos);
-        //            }
-        //        }
-
-        //    }
-        //}
-
-
         if (Input.GetMouseButtonDown(0))
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
-                //Debug.Log("클릭 수 : " + dataManager.data.clickCount[dataManager.currentStage]);
+                Debug.Log("클릭 수 : " + dataManager.data.clickCount[dataManager.currentStage]);
 
                 Vector2 mousePosition = Input.mousePosition;
                 mousePosition = mainCamera.ScreenToWorldPoint(mousePosition);
 
-                RaycastHit2D hit = Physics2D.Raycast(mousePosition, mainCamera.transform.forward);
-                if (hit.collider != null)
-                {
-                    /*디버깅용*/
-                    text.text = hit.collider.name;
-                    Debug.Log(hit.collider.name);
-                    /*디버깅용*/
+                //RaycastHit2D hit = Physics2D.Raycast(mousePosition, mainCamera.transform.forward);
+                //if (hit.collider != null)
+                //{
+                //    /*디버깅용*/
+                //    text.text = hit.collider.name;
+                //    Debug.Log(hit.collider.name);
+                //    /*디버깅용*/
 
 
-                    if (hit.collider.name == "GameSprite")
-                    {
+                //    if (hit.collider.name == "GameSprite")
+                //    {
                         dataManager.data.clickCount[dataManager.currentStage] += 1;
                         dataManager.Save();
 
                         SprayControl(mousePosition);
-                    }
+                //    }
 
-                }
+                //}
             }
 
         }

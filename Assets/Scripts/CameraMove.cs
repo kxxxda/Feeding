@@ -7,7 +7,7 @@ public class CameraMove : MonoBehaviour
     private float posZ;
     private float posX;
     private Vector3 MouseStart;
-
+    private Touch tempTouchs;
     void Start()
     {
         posZ = transform.position.z;  
@@ -16,19 +16,21 @@ public class CameraMove : MonoBehaviour
 
     void Update()
     {
-        Moving();
+        //Moving();
+        MobileMoving();
     }
 
-    void Moving()
+    public void Moving()
     {
-        if (Input.GetMouseButtonDown(1))
+        
+        if (Input.GetMouseButtonDown(0))
         {
             MouseStart = new Vector3(posX, Input.mousePosition.y, posZ);
             MouseStart = Camera.main.ScreenToWorldPoint(MouseStart);
             MouseStart.z = transform.position.z;
 
         }
-        else if (Input.GetMouseButton(1))
+        else if (Input.GetMouseButton(0))
         {
             Vector3 temp = new Vector3();
             var MouseMove = new Vector3(posX, Input.mousePosition.y, posZ);
@@ -49,29 +51,35 @@ public class CameraMove : MonoBehaviour
 
     void MobileMoving()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.touchCount == 1)
         {
-            MouseStart = new Vector3(posX, Input.mousePosition.y, posZ);
-            MouseStart = Camera.main.ScreenToWorldPoint(MouseStart);
-            MouseStart.z = transform.position.z;
+            tempTouchs = Input.GetTouch(0);
+            if (tempTouchs.phase == TouchPhase.Began)
+            {
+                MouseStart = new Vector3(posX, Input.mousePosition.y, posZ);
+                MouseStart = Camera.main.ScreenToWorldPoint(MouseStart);
+                MouseStart.z = transform.position.z;
 
-        }
-        else if (Input.GetMouseButton(1))
-        {
-            Vector3 temp = new Vector3();
-            var MouseMove = new Vector3(posX, Input.mousePosition.y, posZ);
-            MouseMove = Camera.main.ScreenToWorldPoint(MouseMove);
-            MouseMove.z = transform.position.z;
+            }
+            else if (tempTouchs.phase == TouchPhase.Moved)
+            {
+                Vector3 temp = new Vector3();
+                var MouseMove = new Vector3(posX, Input.mousePosition.y, posZ);
+                MouseMove = Camera.main.ScreenToWorldPoint(MouseMove);
+                MouseMove.z = transform.position.z;
 
 
-            temp = transform.position - (MouseMove - MouseStart);
+                temp = transform.position - (MouseMove - MouseStart);
 
-            if (temp.y > 20)
-                temp.y = 20;
-            if (temp.y < 0)
-                temp.y = 0;
+                if (temp.y > 20)
+                    temp.y = 20;
+                if (temp.y < 0)
+                    temp.y = 0;
 
-            transform.position = temp;
+                transform.position = temp;
+                //temp *= Time.deltaTime ;
+                //transform.Translate(temp);
+            }
         }
     }
 }

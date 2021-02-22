@@ -46,22 +46,22 @@ public class GamePause : MonoBehaviour
     {
         dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
 
-        displayRectTrans = display.GetComponent<RectTransform>();
-        contentRectTrans = content.GetComponent<RectTransform>();
-        progressBarRectTrans = progressBar.GetComponent<RectTransform>();
-        pauseButtonRectTrans = pauseButton.GetComponent<RectTransform>();
-        hairLengthPanelRectTrans = hairLengthPanel.GetComponent<RectTransform>();
-        pausePanelRectTrans = pausePanel.GetComponent<RectTransform>();
-        coverPanelRectTrans = coverPanel.GetComponent<RectTransform>();
-        newStagePanelRectTrans = newStagePanel.GetComponent<RectTransform>();
+        //displayRectTrans = display.GetComponent<RectTransform>();
+        //contentRectTrans = content.GetComponent<RectTransform>();
+        //progressBarRectTrans = progressBar.GetComponent<RectTransform>();
+        //pauseButtonRectTrans = pauseButton.GetComponent<RectTransform>();
+        //hairLengthPanelRectTrans = hairLengthPanel.GetComponent<RectTransform>();
+        //pausePanelRectTrans = pausePanel.GetComponent<RectTransform>();
+        //coverPanelRectTrans = coverPanel.GetComponent<RectTransform>();
+        //newStagePanelRectTrans = newStagePanel.GetComponent<RectTransform>();
 
-        contentCollider = content.GetComponent<BoxCollider2D>();
-        sliderCollider = progressBar.GetComponent<BoxCollider2D>();
-        pauseButtonCollider = pauseButton.GetComponent<BoxCollider2D>();
-        hairLengthPanelCollider = hairLengthPanel.GetComponent<BoxCollider2D>();
-        pausePanelCollider = pausePanel.GetComponent<BoxCollider2D>();
-        coverPanelCollider = coverPanel.GetComponent<BoxCollider2D>();
-        newStagePanelCollider = newStagePanel.GetComponent<BoxCollider2D>();
+        //contentCollider = content.GetComponent<BoxCollider2D>();
+        //sliderCollider = progressBar.GetComponent<BoxCollider2D>();
+        //pauseButtonCollider = pauseButton.GetComponent<BoxCollider2D>();
+        //hairLengthPanelCollider = hairLengthPanel.GetComponent<BoxCollider2D>();
+        //pausePanelCollider = pausePanel.GetComponent<BoxCollider2D>();
+        //coverPanelCollider = coverPanel.GetComponent<BoxCollider2D>();
+        //newStagePanelCollider = newStagePanel.GetComponent<BoxCollider2D>();
 
     }
 
@@ -81,7 +81,7 @@ public class GamePause : MonoBehaviour
             isPanelOpened = true;
         }
 
-        SetCollider();
+        //SetCollider();
     }
 
     void SetCollider()
