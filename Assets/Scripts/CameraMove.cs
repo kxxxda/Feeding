@@ -6,7 +6,7 @@ public class CameraMove : MonoBehaviour
 {
     private float posZ;
     private float posX;
-    private Vector3 MouseStart,MouseMove;
+    private Vector3 MouseStart, MouseMove;
     private Touch tempTouchs;
     public Rigidbody2D rigid;
     GameController gameController;
@@ -17,8 +17,8 @@ public class CameraMove : MonoBehaviour
     }
     void Start()
     {
-        posZ = transform.position.z;  
-        posX = transform.position.x;  
+        posZ = transform.position.z;
+        posX = transform.position.x;
     }
 
     void Update()
@@ -44,7 +44,7 @@ public class CameraMove : MonoBehaviour
             MouseMove = new Vector3(posX, Input.mousePosition.y, posZ);
             MouseMove = Camera.main.ScreenToWorldPoint(MouseMove);
             MouseMove.z = transform.position.z;
-            if(Mathf.Abs(MouseStart.y - MouseMove.y) >0.5)
+            if (Mathf.Abs(MouseStart.y - MouseMove.y) > 0.5)
                 Move();
         }
     }
