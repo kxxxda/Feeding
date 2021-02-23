@@ -7,8 +7,8 @@ using UnityEngine.EventSystems;
 public class GameController : MonoBehaviour
 {
     public GameObject hairParent;
-    public GameObject[] straightHairPrefabs;
-    public int straightHairIndex;
+    public GameObject[] hairSpritePrefabs;
+    public int index1;
     public Text text;
 
     private Camera mainCamera;
@@ -17,19 +17,18 @@ public class GameController : MonoBehaviour
     private ScrollRect scrollRect;
     private Touch tempTouchs;
     private Vector2 touchPos;
-    private bool touchOn;
     private int maxClick;
     private bool isViewport;
-    private GameObject[] straightHairSprites;
 
+    public bool dragOn;
+    Rigidbody2D rigid;
 
-    private Vector2 nowPos, prePos;
-    private Vector3 movePos;
-    private float Speed = 0.25f;
+    GameObject[] hairSprites;
+
     private void Awake()
     {
         //Debug.Log("Game Controller Awake");
-        straightHairSprites = new GameObject[55];
+        hairSprites = new GameObject[4];
 
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
@@ -40,12 +39,14 @@ public class GameController : MonoBehaviour
 
         Generate();
         //FirstSpriteControl();
+
+        rigid = mainCamera.GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        isViewport = false;
-        
+        dragOn = false;
+
         // # 터치 이벤트 
         PCTouchEvent();
         //MobileTouchEvent();
@@ -57,39 +58,17 @@ public class GameController : MonoBehaviour
 
     void Generate()
     {
-        for (int index = 0; index < straightHairPrefabs.Length; index++)  //우선만들어놓기
-        { 
-            straightHairSprites[index] = Instantiate(straightHairPrefabs[index]);
-            straightHairSprites[index].SetActive(false);
+        for (int index = 0; index < hairSpritePrefabs.Length; index++)
+        { //우선만들어놓기
+            hairSprites[index] = Instantiate(hairSpritePrefabs[index]);
+            hairSprites[index].SetActive(false);
         }
     }
-
-    /* void Generate()
-     {
-         InstantiateObject(straightHairSprites, straightHairPrefabs);
-     }
-
-     void InstantiateObject(GameObject[] hairSprites, GameObject[] hairPrefabs)
-     {
-         for (int index = 0; index < hairSprites.Length; index++)
-         {
-             hairSprites[index] = Instantiate(hairPrefabs[index]);
-             hairSprites[index].SetActive(false);
-         }
-     }
-    */
-
-    //void FirstSpriteControl()
-    //{
-    //    for (int i = 1; i < dataManager.data.clickStage[dataManager.currentStage]; i++)
-    //        InstantiateObject();
-    //}
 
 
     void MobileTouchEvent()
     {
         //터치 시에
-        touchOn = false;
         if (Input.touchCount > 0)
         {
             for (int i = 0; i < Input.touchCount; i++)
@@ -99,39 +78,20 @@ public class GameController : MonoBehaviour
                     tempTouchs = Input.GetTouch(i);
                     if (tempTouchs.phase == TouchPhase.Began)
                     {
+                        text.text = rigid.mass + "  " + rigid.drag;
                         touchPos = mainCamera.ScreenToWorldPoint(tempTouchs.position);
-                        touchOn = true;
 
-                        prePos = tempTouchs.position - tempTouchs.deltaPosition;
 
-                        dataManager.data.clickCount[dataManager.currentStage] += 1;
-                        dataManager.Save();
-
-                        SprayControl(touchPos);
-                        
-                        //레이캐스트로 터치 
-                        //RaycastHit2D hit = Physics2D.Raycast(touchPos, mainCamera.transform.forward);
-                        //text.text = hit.collider.name + dataManager.data.clickCount[dataManager.currentStage];
-                        //if (hit.collider != null&&hit.collider.name == "GameSprite")
+                       if(!dragOn)
+                        {
+                            DataControl();
+                            SprayControl(touchPos);
+                        }    
                     }
-                    //else if (tempTouchs.phase == TouchPhase.Moved)
-                    //{
-                    //    nowPos = tempTouchs.position - tempTouchs.deltaPosition;
-                    //    movePos = (Vector3)(prePos - nowPos);
-                    //    movePos.z = -50;
-                    //    movePos.x = 0;
-                    //    //if (movePos.y > 20)
-                    //    //    movePos.y = 20;
-                    //    //if (movePos.y < 0)
-                    //    //    movePos.y = 0;
-                    //    movePos *= Time.deltaTime * Speed;
-                    //    mainCamera.transform.Translate(movePos);
-                    //    prePos = tempTouchs.position - tempTouchs.deltaPosition;
-                    //}
+
                 }
             }
         }
-
     }
 
     void PCTouchEvent()
@@ -140,34 +100,24 @@ public class GameController : MonoBehaviour
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.Log("클릭 수 : " + dataManager.data.clickCount[dataManager.currentStage]);
+                //Debug.Log("클릭 수 : " + dataManager.data.clickCount[dataManager.currentStage]);
 
                 Vector2 mousePosition = Input.mousePosition;
                 mousePosition = mainCamera.ScreenToWorldPoint(mousePosition);
 
-                //RaycastHit2D hit = Physics2D.Raycast(mousePosition, mainCamera.transform.forward);
-                //if (hit.collider != null)
-                //{
-                //    /*디버깅용*/
-                //    text.text = hit.collider.name;
-                //    Debug.Log(hit.collider.name);
-                //    /*디버깅용*/
-
-
-                //    if (hit.collider.name == "GameSprite")
-                //    {
-                        dataManager.data.clickCount[dataManager.currentStage] += 1;
-                        dataManager.Save();
-
-                        SprayControl(mousePosition);
-                //    }
-
-                //}
+                if (!dragOn)
+                {
+                    DataControl();
+                    SprayControl(mousePosition);
+                }
             }
-
         }
     }
-
+    void DataControl()
+    {
+        dataManager.data.clickCount[dataManager.currentStage] += 1;
+        dataManager.Save();
+    }
     void SprayControl(Vector2 pos)
     {
         GameObject hairSpray = objectManager.MakeObj("HairSpray");
@@ -177,6 +127,11 @@ public class GameController : MonoBehaviour
         h.StartSpray();
     }
 
+    //void FirstSpriteControl()
+    //{
+    //    for (int i = 1; i < dataManager.data.clickStage[dataManager.currentStage]; i++)
+    //        InstantiateObject();
+    //}
     void SpriteControl()
     {
         int clickCount = dataManager.data.clickCount[dataManager.currentStage];
@@ -194,7 +149,6 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("생성");
             InstantiateObject();
-            //ObjectActivate(straightHairSprites, straightHairIndex);
             dataManager.data.clickStage[dataManager.currentStage]++;
             dataManager.Save();
             //progress바 올리기
@@ -204,41 +158,39 @@ public class GameController : MonoBehaviour
     void InstantiateObject()
     {
         Debug.Log("머리 생성합니다.");
-        straightHairSprites[straightHairIndex].transform.SetParent(hairParent.transform); //hierarchy 창에서 위치 설정
+        hairSprites[index1].transform.SetParent(hairParent.transform); //hierarchy 창에서 위치 설정
 
 
-        RectTransform rc = straightHairSprites[straightHairIndex].GetComponent<RectTransform>();
+        RectTransform rc = hairSprites[index1].GetComponent<RectTransform>();
         rc.localScale = new Vector3(1, 1, 1); //scale 1로 설정
 
-        if (straightHairIndex != 0)
+        if (index1 != 0)
         {
-            straightHairSprites[straightHairIndex - 1].SetActive(false); //이전 스프라이트는 비활성화
-            //Debug.Log("인덱스 " + straightHairIndex + "-1 비활성화했음");
+            hairSprites[index1 - 1].SetActive(false); //이전 스프라이트는 비활성화
+            Debug.Log("인덱스 " + index1 + "-1 비활성화했음");
         }
 
 
-        straightHairSprites[straightHairIndex].SetActive(true); //새로운 스프라이트 활성화
-        //Debug.Log("인덱스 " + straightHairIndex + " 활성화했음");
+        hairSprites[index1].SetActive(true); //새로운 스프라이트 활성화
+        Debug.Log("인덱스 " + index1 + " 활성화했음");
 
-        straightHairIndex++;
+        index1++;
     }
 
-    /*void ObjectActivate(GameObject[] hairSprites, int index)
+    public void MassUp()
     {
-        Debug.Log("머리 생성합니다.");
-        hairSprites[index].transform.SetParent(hairParent.transform); //hierarchy 창에서 위치 설정
-
-
-        RectTransform rc = hairSprites[index].GetComponent<RectTransform>();
-        rc.localScale = new Vector3(1, 1, 1); //scale 1로 설정
-
-        if (index != 0) 
-            hairSprites[index - 1].SetActive(false); //이전 스프라이트는 비활성화
-
-        hairSprites[index].SetActive(true); //새로운 스프라이트 활성화
-
-        index++;
-    }*/
-
-
+        rigid.mass += 0.02f;
+    }
+    public void MassDown()
+    {
+        rigid.mass -= 0.02f;
+    }
+    public void LinearUp()
+    {
+        rigid.drag += 0.1f;
+    }
+    public void LinearDown()
+    {
+        rigid.drag -= 0.1f;
+    }
 }
