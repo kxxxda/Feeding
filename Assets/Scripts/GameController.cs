@@ -78,7 +78,7 @@ public class GameController : MonoBehaviour
                     tempTouchs = Input.GetTouch(i);
                     if (tempTouchs.phase == TouchPhase.Began)
                     {
-                        text.text = rigid.mass + "  " + rigid.drag;
+                        text.text = rigid.mass + "," + rigid.drag;
                         touchPos = mainCamera.ScreenToWorldPoint(tempTouchs.position);
 
 
@@ -104,9 +104,10 @@ public class GameController : MonoBehaviour
 
                 Vector2 mousePosition = Input.mousePosition;
                 mousePosition = mainCamera.ScreenToWorldPoint(mousePosition);
-
+                text.text = rigid.mass + "," + rigid.drag;
                 if (!dragOn)
                 {
+
                     DataControl();
                     SprayControl(mousePosition);
                 }
