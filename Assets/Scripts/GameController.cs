@@ -7,65 +7,85 @@ using UnityEngine.EventSystems;
 public class GameController : MonoBehaviour
 {
     public GameObject hairParent;
+    public GameObject[] hairPrefabs;
     public GameObject[] straightHairPrefabs;
-    public int straightHairIndex;
-
+    public int hairIndex;
     public Text text;
 
+    private GameObject[] hairSprites;
     private Camera mainCamera;
     private DataManager dataManager;
     private ObjectManager objectManager;
     private Touch tempTouchs;
     private Vector2 touchPos;
     private int maxClick;
-    private GameObject[] straightHairSprites;
-
+    
 
     public bool dragOn;
     Rigidbody2D rigid;
 
-    GameObject[] hairSprites;
-
+    
     private void Awake()
     {
         //Debug.Log("Game Controller Awake");
-        straightHairSprites = new GameObject[55];
-
 
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
         objectManager = GameObject.Find("Object Manager").GetComponent<ObjectManager>();
+        rigid = mainCamera.GetComponent<Rigidbody2D>();
         //scrollRect = GameObject.Find("Scroll View").GetComponent<ScrollRect>();
 
         maxClick = 10;//스테이지간 클릭 간격 조절
 
         Generate();
-        //FirstSpriteControl();
-
-        rigid = mainCamera.GetComponent<Rigidbody2D>();
+        HairRecordsLoad(); //머리 이전 기록 가져오기
     }
 
-    private void Update()
+    void Generate()
     {
-        dragOn = false;
+        int currentStage = dataManager.currentStage;
+        switch (currentStage) {
+            case 0:
+                hairPrefabs = straightHairPrefabs;
+                hairSprites = new GameObject[55];
+                break;
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                break;
+        }
 
-        // # 터치 이벤트 
-        PCTouchEvent();
-        //MobileTouchEvent();
-
-        // # 클릭수에 따른 스프라이트 관리 
-        SpriteControl();
-
+        for (int index = 0; index < hairPrefabs.Length; index++)  //우선만들어놓기
+        {
+            hairSprites[index] = Instantiate(hairPrefabs[index]);
+            hairSprites[index].SetActive(false);
+        }
     }
 
-    void Generate() 
-     {
-         for (int index = 0; index < straightHairPrefabs.Length; index++)  //우선만들어놓기
-         { 
-             straightHairSprites[index] = Instantiate(straightHairPrefabs[index]);
-             straightHairSprites[index].SetActive(false);
-         }
-     }
+    void HairRecordsLoad()
+    {
+        Debug.Log(dataManager.data.clickStage[dataManager.currentStage]+" <- 클릭스테이지");
+        Debug.Log("머리기록가져오기");
+
+        hairIndex = dataManager.data.clickStage[dataManager.currentStage];
+
+        HairObjectSetting();
+        
+        hairSprites[hairIndex].SetActive(true);
+    }
+
+    void HairObjectSetting()
+    {
+        hairSprites[hairIndex].transform.SetParent(hairParent.transform);
+
+        RectTransform rectTrans = hairSprites[hairIndex].GetComponent<RectTransform>();
+        rectTrans.localScale = new Vector3(1, 1, 1); //scale 1로 설정
+    }
+
 
     /*void Generate()
     {
@@ -81,6 +101,18 @@ public class GameController : MonoBehaviour
         }
     }*/
 
+    private void Update()
+    {
+        dragOn = false;
+
+        // # 터치 이벤트 
+        PCTouchEvent();
+        //MobileTouchEvent();
+
+        // # 클릭수에 따른 스프라이트 관리 
+        SpriteControl();
+
+    }
 
     void MobileTouchEvent()
     {
@@ -169,23 +201,16 @@ public class GameController : MonoBehaviour
     void InstantiateObject()
     {
         Debug.Log("머리 생성합니다.");
-        straightHairSprites[straightHairIndex].transform.SetParent(hairParent.transform); //hierarchy 창에서 위치 설정
+
+        HairObjectSetting();
+
+        if (hairIndex != 0)
+            hairSprites[hairIndex - 1].SetActive(false); //이전 스프라이트는 비활성화
 
 
-        RectTransform rc = straightHairSprites[straightHairIndex].GetComponent<RectTransform>();
-        rc.localScale = new Vector3(1, 1, 1); //scale 1로 설정
+        hairSprites[hairIndex].SetActive(true); //새로운 스프라이트 활성화
 
-        if (straightHairIndex != 0)
-        {
-            straightHairSprites[straightHairIndex - 1].SetActive(false); //이전 스프라이트는 비활성화
-            //Debug.Log("인덱스 " + straightHairIndex + "-1 비활성화했음");
-        }
-
-
-        straightHairSprites[straightHairIndex].SetActive(true); //새로운 스프라이트 활성화
-        //Debug.Log("인덱스 " + straightHairIndex + " 활성화했음");
-
-        straightHairIndex++;
+        hairIndex++;
     }
 
     /*void ObjectActivate(GameObject[] hairSprites, int index)
