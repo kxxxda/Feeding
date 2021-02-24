@@ -58,14 +58,14 @@ public class GameController : MonoBehaviour
 
     }
 
-    void Generate()
-    {
-        for (int index = 0; index < straightHairPrefabs.Length; index++)  //우선만들어놓기
-        {
-            straightHairSprites[index] = Instantiate(straightHairPrefabs[index]);
-            straightHairSprites[index].SetActive(false);
-        }
-    }
+    void Generate() 
+     {
+         for (int index = 0; index < straightHairPrefabs.Length; index++)  //우선만들어놓기
+         { 
+             straightHairSprites[index] = Instantiate(straightHairPrefabs[index]);
+             straightHairSprites[index].SetActive(false);
+         }
+     }
 
     /*void Generate()
     {
@@ -142,7 +142,7 @@ public class GameController : MonoBehaviour
         h.StartSpray();
     }
 
-
+    
     void SpriteControl()
     {
         int clickCount = dataManager.data.clickCount[dataManager.currentStage];

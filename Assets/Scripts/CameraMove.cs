@@ -10,11 +10,11 @@ public class CameraMove : MonoBehaviour
     private Vector3 MouseStart, MouseMove;
     private Touch tempTouchs;
     public Rigidbody2D rigid;
-    GameController gameController;
+    GamePause gamePause;
 
     void Awake()
     {
-        gameController = GameObject.Find("Game Controller").GetComponent<GameController>();
+        gamePause = GameObject.Find("GamePause").GetComponent<GamePause>();
         maxBoundary = 20;
     }
     void Start()
@@ -26,7 +26,8 @@ public class CameraMove : MonoBehaviour
     void Update()
     {
         // # 방향벡터 계산
-        Drag();
+        if(!gamePause.paused)
+            Drag();
         //MobileDrag();
 
         // # 화면 밖으로 못나가게 지정
@@ -74,7 +75,6 @@ public class CameraMove : MonoBehaviour
 
     void Move()
     {
-        gameController.dragOn = true;
         transform.position = transform.position - (MouseMove - MouseStart);
         rigid.AddForce((MouseStart - MouseMove).normalized * 0.25f, ForceMode2D.Impulse);
         //transform.position += temp * 0.5f* Time.deltaTime;

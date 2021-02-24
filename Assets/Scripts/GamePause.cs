@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GamePause : MonoBehaviour
 {
     public GameObject menuSet;
+    public GameObject confirmSet;
     public GameObject display;
     public GameObject content;
     public GameObject hairLengthPanel;
@@ -39,6 +40,7 @@ public class GamePause : MonoBehaviour
     public Text hairLength;
 
     private bool bPaused = false;
+    public bool paused = false;
 
     private bool isPanelOpened = false;
 
@@ -46,6 +48,7 @@ public class GamePause : MonoBehaviour
     {
         dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
 
+        paused = false;
         //displayRectTrans = display.GetComponent<RectTransform>();
         //contentRectTrans = content.GetComponent<RectTransform>();
         //progressBarRectTrans = progressBar.GetComponent<RectTransform>();
@@ -68,6 +71,7 @@ public class GamePause : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(paused);
         hairLength.text = dataManager.data.clickStage[dataManager.currentStage].ToString() + " M"; //근데 콘텐트의 길이가 머리 길이가 되어서는 안됨 *수정필요
                                                                                                    //Debug.Log(contentRectTrans.rect.height);
 
@@ -122,14 +126,19 @@ public class GamePause : MonoBehaviour
         if (pause)
         {
             bPaused = true;
-            OnClickToggleMenuSetButton();
+            if(!paused)
+                OnClickToggleMenuSetButton();
         }
         else
         {
             if (bPaused)
             {
                 bPaused = false;
-                OnClickToggleMenuSetButton();
+                if (paused)
+                {
+                    OnClickToggleMenuSetButton();
+                    TogglePause();
+                }
             }
         }
     }
@@ -138,9 +147,12 @@ public class GamePause : MonoBehaviour
         newStagePanel.SetActive(false);
     }
 
+    public void TogglePause()
+    {
+        paused = !paused;
+    }
     public void OnClickToggleMenuSetButton()
     {
-
         menuSet.SetActive(!menuSet.activeSelf);
 
         //pausePanel.SetActive(!pausePanel.activeSelf);
@@ -152,10 +164,15 @@ public class GamePause : MonoBehaviour
         SceneManager.LoadScene("Menu Scene");
     }
 
-    public void StageInitialize()
+    public void ConfirmStageInitialize()
     {
         dataManager.InitiateClickCount(dataManager.currentStage);
         dataManager.Save();
+        SceneManager.LoadScene("Menu Scene");
+    }
+    public void StageInitialize()
+    {
+        confirmSet.SetActive(!confirmSet.activeSelf);
     }
 
     public void GameExit()
