@@ -62,6 +62,7 @@ public class GameController : MonoBehaviour
         for (int index = 0; index < hairPrefabs.Length; index++)  //우선만들어놓기
         {
             hairSprites[index] = Instantiate(hairPrefabs[index]);
+            hairSprites[index].transform.SetParent(hairParent.transform);
             hairSprites[index].SetActive(false);
         }
     }
@@ -80,8 +81,6 @@ public class GameController : MonoBehaviour
 
     void HairObjectSetting()
     {
-        hairSprites[hairIndex].transform.SetParent(hairParent.transform);
-
         RectTransform rectTrans = hairSprites[hairIndex].GetComponent<RectTransform>();
         rectTrans.localScale = new Vector3(1, 1, 1); //scale 1로 설정
     }
