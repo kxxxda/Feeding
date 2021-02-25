@@ -33,7 +33,6 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         HairRecordsLoad();  //머리 이전 기록 가져오기
-        
     }
     void HairRecordsLoad()
     {

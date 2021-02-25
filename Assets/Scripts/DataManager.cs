@@ -51,7 +51,6 @@ public class DataManager : MonoBehaviour
         {
             return null;
         }
-
     }
 
     void ManageSaveFile()
