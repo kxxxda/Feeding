@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public GameObject hairParent;
     public GameObject[] hairPrefabs;
     public GameObject[] straightHairPrefabs;
+    public GameObject Man;
     public int hairIndex;
     public Text text;
 
@@ -32,13 +33,16 @@ public class GameController : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
         objectManager = GameObject.Find("Object Manager").GetComponent<ObjectManager>();
+        
+        /*디버깅용*/
         rigid = mainCamera.GetComponent<Rigidbody2D>();
         //scrollRect = GameObject.Find("Scroll View").GetComponent<ScrollRect>();
 
         maxClick = 10;//스테이지간 클릭 간격 조절
 
         Generate();
-        HairRecordsLoad(); //머리 이전 기록 가져오기
+        HairRecordsLoad();  //머리 이전 기록 가져오기
+        ManRecordsLoad();   //성별 기록 가져오기
     }
 
     void Generate()
@@ -59,13 +63,36 @@ public class GameController : MonoBehaviour
                 break;
         }
 
+        // # 머리카락 생성
         for (int index = 0; index < hairPrefabs.Length; index++)  //우선만들어놓기
         {
             hairSprites[index] = Instantiate(hairPrefabs[index]);
+            hairSprites[index].transform.SetParent(hairParent.transform);
             hairSprites[index].SetActive(false);
         }
+
+        // # 배경 생성
     }
 
+    void ManRecordsLoad()
+    {
+        int currentGender = dataManager.currentGender;
+        Image image = Man.GetComponent<Image>();
+        switch (currentGender)
+        {
+            case 0:
+                return;
+            case 1:
+                image.sprite = Resources.Load("man/Womansad", typeof(Sprite)) as Sprite;
+                return;
+            case 2:
+                image.sprite = Resources.Load("man/Mansad", typeof(Sprite)) as Sprite;
+                return;
+            case 3:
+                image.sprite = null;
+                return;
+        }
+    }
     void HairRecordsLoad()
     {
         Debug.Log(dataManager.data.clickStage[dataManager.currentStage]+" <- 클릭스테이지");
@@ -80,8 +107,6 @@ public class GameController : MonoBehaviour
 
     void HairObjectSetting()
     {
-        hairSprites[hairIndex].transform.SetParent(hairParent.transform);
-
         RectTransform rectTrans = hairSprites[hairIndex].GetComponent<RectTransform>();
         rectTrans.localScale = new Vector3(1, 1, 1); //scale 1로 설정
     }
