@@ -8,7 +8,8 @@ public class GameController : MonoBehaviour
 {
     public Image manImage;
     public Image hairImage;
-    
+    public Image longHair;
+
     public Text text;
 
     private Camera mainCamera;
@@ -17,8 +18,8 @@ public class GameController : MonoBehaviour
     private Touch tempTouchs;
     private Vector2 touchPos;
     private int maxClick;
-    
-    
+
+
     private void Awake()
     {
         //Debug.Log("Game Controller Awake");
@@ -26,7 +27,7 @@ public class GameController : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
         objectManager = GameObject.Find("Object Manager").GetComponent<ObjectManager>();
-        
+
         maxClick = 10;//스테이지간 클릭 간격 조절
     }
 
@@ -37,9 +38,25 @@ public class GameController : MonoBehaviour
     void HairRecordsLoad()
     {
         int hairIndex = dataManager.data.clickStage;
+
+        if (hairIndex >= 52)
+        {
+            hairImage.gameObject.SetActive(false);
+            longHair.gameObject.SetActive(true);
+            RectTransform rectTrans = longHair.rectTransform;
+            Debug.Log(rectTrans.position.y);
+            Debug.Log(rectTrans.position.y + 20);
+
+            rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x, rectTrans.sizeDelta.y + 20);
+            rectTrans.position = new Vector3(rectTrans.position.x, rectTrans.position.y + 20, rectTrans.position.z);
+
+           
+
+            return;
+        }
         string path = "hair/ManDown/DawnHair" + hairIndex;
         Debug.Log(path);
-        hairImage.sprite= Resources.Load(path, typeof(Sprite)) as Sprite;
+        hairImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
     }
 
 
@@ -67,8 +84,8 @@ public class GameController : MonoBehaviour
                     if (tempTouchs.phase == TouchPhase.Began)
                     {
                         touchPos = mainCamera.ScreenToWorldPoint(tempTouchs.position);
-                            DataControl();
-                            SprayControl(touchPos);
+                        DataControl();
+                        SprayControl(touchPos);
                     }
 
                 }
