@@ -6,10 +6,7 @@ using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
-    public Image manImage;                  //사람 이미지 바꾸기
-    public Image hairImage;                 //머리 이미지 바꾸기
-
-    public GameObject backGroundPrefab\\;     //배경 프리팹 1개 선언하고 배경 바꿔주기 --> 전부 프리팹화 하면 너무 많아짐
+    public GameObject backGroundPrefab;     //배경 프리팹 1개 선언하고 배경 바꿔주기 --> 전부 프리팹화 하면 너무 많아짐
     public GameObject backGroundParent;     //배경의 부모
     public Image manImage;
     public Image hairImage;
