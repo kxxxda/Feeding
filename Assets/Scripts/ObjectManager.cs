@@ -7,11 +7,9 @@ public class ObjectManager : MonoBehaviour
     //프리팹들
     public GameObject hairSprayPrefab;
 
-
     //오브젝트 배열
     GameObject[] hairSpray;
    
-
 
     //타겟 오브젝트 배열
     GameObject[] targetPool;

@@ -6,14 +6,18 @@ using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
-    public Image manImage;
-    public Image hairImage;
-    
-    public Text text;
+    public Image manImage;                  //사람 이미지 바꾸기
+    public Image hairImage;                 //머리 이미지 바꾸기
+
+    public GameObject backGroundPrefab;     //배경 프리팹 1개 선언하고 배경 바꿔주기 --> 전부 프리팹화 하면 너무 많아짐
+    public GameObject backGroundParent;     //배경의 부모
+
+    public Text text;                       //상단 머리 길이 
 
     private Camera mainCamera;
     private DataManager dataManager;
     private ObjectManager objectManager;
+    private CameraMove cameraMove;
     private Touch tempTouchs;
     private Vector2 touchPos;
     private int maxClick;
@@ -26,28 +30,47 @@ public class GameController : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
         objectManager = GameObject.Find("Object Manager").GetComponent<ObjectManager>();
-        
+        cameraMove = mainCamera.GetComponent<CameraMove>();
+
         maxClick = 10;//스테이지간 클릭 간격 조절
     }
 
     private void Start()
     {
         HairRecordsLoad();  //머리 이전 기록 가져오기
+        BackGroungRecordsLoad();
     }
     void HairRecordsLoad()
     {
-        int hairIndex = dataManager.data.clickStage;
-        string path = "hair/ManDown/DawnHair" + hairIndex;
-        Debug.Log(path);
+        int index = dataManager.data.clickStage;
+        string path = "hair/ManDown/DawnHair" + (index - 1);
+        Debug.Log(dataManager.data.clickStage);
         hairImage.sprite= Resources.Load(path, typeof(Sprite)) as Sprite;
     }
 
+    void BackGroungRecordsLoad()
+    {
+        int index = dataManager.data.clickStage;
 
+        for(int i=1;i<index;i++)
+        {
+            BackGroundObjectSetting(i);
+        }
+    }
+
+    void BackGroundObjectSetting(int i)
+    {
+        GameObject backGround = Instantiate(backGroundPrefab);
+        backGround.transform.SetParent(backGroundParent.transform);
+        backGround.transform.localScale = new Vector3(1, 1, 1);
+        backGround.transform.localPosition = new Vector3(0, 1151.9f + (384 * (float)i), 0);
+        cameraMove.maxBoundary += 2;
+    }
     private void Update()
     {
         // # 터치 이벤트 
-        PCTouchEvent();
-        //MobileTouchEvent();
+        //PCTouchEvent();
+        MobileTouchEvent();
 
         // # 클릭수에 따른 스프라이트 관리 
         SpriteControl();
@@ -114,9 +137,9 @@ public class GameController : MonoBehaviour
         else if (clickCount >= maxCount) //이때 생성될 프리팹 이미지 변경?
         {
             Debug.Log("생성");
-            InstantiateObject();
             dataManager.data.clickStage++;
             dataManager.Save();
+            InstantiateObject();
             //progress바 올리기
         }
     }
@@ -125,5 +148,6 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("머리 생성합니다.");
         HairRecordsLoad();
+        BackGroundObjectSetting(dataManager.data.clickStage-1);
     }
 }

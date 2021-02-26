@@ -15,7 +15,7 @@ public class CameraMove : MonoBehaviour
     void Awake()
     {
         gamePause = GameObject.Find("GamePause").GetComponent<GamePause>();
-        maxBoundary = 20;
+        maxBoundary = 0;
     }
     void Start()
     {
@@ -26,9 +26,9 @@ public class CameraMove : MonoBehaviour
     void Update()
     {
         // # 방향벡터 계산
-        if(!gamePause.paused)
-            Drag();
-        //MobileDrag();
+        if (!gamePause.paused)
+            //Drag();
+            MobileDrag();
 
         // # 화면 밖으로 못나가게 지정
         Boundary();

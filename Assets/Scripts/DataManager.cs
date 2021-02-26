@@ -12,13 +12,13 @@ public class DataManager : MonoBehaviour
 
     void Awake()
     {
-        if(dataManager != null)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        dataManager = this;
-        DontDestroyOnLoad(this);
+        //if(dataManager != null)
+        //{
+        //    Destroy(this.gameObject);
+        //    return;
+        //}
+        //dataManager = this;
+        //DontDestroyOnLoad(this);
 
         ManageSaveFile();
     }
