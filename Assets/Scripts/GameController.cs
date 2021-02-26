@@ -9,10 +9,13 @@ public class GameController : MonoBehaviour
     public Image manImage;                  //사람 이미지 바꾸기
     public Image hairImage;                 //머리 이미지 바꾸기
 
-    public GameObject backGroundPrefab;     //배경 프리팹 1개 선언하고 배경 바꿔주기 --> 전부 프리팹화 하면 너무 많아짐
+    public GameObject backGroundPrefab\\;     //배경 프리팹 1개 선언하고 배경 바꿔주기 --> 전부 프리팹화 하면 너무 많아짐
     public GameObject backGroundParent;     //배경의 부모
+    public Image manImage;
+    public Image hairImage;
+    public Image longHair;
 
-    public Text text;                       //상단 머리 길이 
+    public Text text;
 
     private Camera mainCamera;
     private DataManager dataManager;
@@ -21,8 +24,8 @@ public class GameController : MonoBehaviour
     private Touch tempTouchs;
     private Vector2 touchPos;
     private int maxClick;
-    
-    
+
+
     private void Awake()
     {
         //Debug.Log("Game Controller Awake");
@@ -42,10 +45,26 @@ public class GameController : MonoBehaviour
     }
     void HairRecordsLoad()
     {
-        int index = dataManager.data.clickStage;
-        string path = "hair/ManDown/DawnHair" + (index - 1);
-        Debug.Log(dataManager.data.clickStage);
-        hairImage.sprite= Resources.Load(path, typeof(Sprite)) as Sprite;
+        int hairIndex = dataManager.data.clickStage;
+
+        if (hairIndex >= 52)
+        {
+            hairImage.gameObject.SetActive(false);
+            longHair.gameObject.SetActive(true);
+            RectTransform rectTrans = longHair.rectTransform;
+            Debug.Log(rectTrans.position.y);
+            Debug.Log(rectTrans.position.y + 20);
+
+            rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x, rectTrans.sizeDelta.y + 20);
+            rectTrans.position = new Vector3(rectTrans.position.x, rectTrans.position.y + 20, rectTrans.position.z);
+
+           
+
+            return;
+        }
+        string path = "hair/ManDown/DawnHair" + hairIndex;
+        Debug.Log(path);
+        hairImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
     }
 
     void BackGroungRecordsLoad()
@@ -90,8 +109,8 @@ public class GameController : MonoBehaviour
                     if (tempTouchs.phase == TouchPhase.Began)
                     {
                         touchPos = mainCamera.ScreenToWorldPoint(tempTouchs.position);
-                            DataControl();
-                            SprayControl(touchPos);
+                        DataControl();
+                        SprayControl(touchPos);
                     }
 
                 }
