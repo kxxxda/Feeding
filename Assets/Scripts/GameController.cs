@@ -10,10 +10,12 @@ public class GameController : MonoBehaviour
     public GameObject backGroundParent;     //배경의 부모
     public Image manImage;
     public Image hairImage;
-    public Image longHair;
+    public GameObject longHair;
+    public GameObject chair;
+    public GameObject chairLeg;
+    public GameObject man;
 
-    public Text text;
-
+    private RectTransform rectTrans;
     private Camera mainCamera;
     private DataManager dataManager;
     private ObjectManager objectManager;
@@ -22,6 +24,7 @@ public class GameController : MonoBehaviour
     private Vector2 touchPos;
     private int maxClick;
 
+    private int boundary;
 
     private void Awake()
     {
@@ -31,8 +34,13 @@ public class GameController : MonoBehaviour
         dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
         objectManager = GameObject.Find("Object Manager").GetComponent<ObjectManager>();
         cameraMove = mainCamera.GetComponent<CameraMove>();
+        rectTrans = longHair.GetComponent<RectTransform>();
+
 
         maxClick = 10;//스테이지간 클릭 간격 조절
+
+        boundary = 1294;
+        Debug.Log(rectTrans.rect.position.y);
     }
 
     private void Start()
@@ -43,54 +51,53 @@ public class GameController : MonoBehaviour
     void HairRecordsLoad()
     {
         int hairIndex = dataManager.data.clickStage;
-
+            
         if (hairIndex >= 52)
         {
             hairImage.gameObject.SetActive(false);
             longHair.gameObject.SetActive(true);
-            RectTransform rectTrans = longHair.rectTransform;
-            Debug.Log(rectTrans.position.y);
-            Debug.Log(rectTrans.position.y + 20);
 
+            //렉트 트랜스도 어웨이크에서 할당함
             rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x, rectTrans.sizeDelta.y + 20);
-            rectTrans.position = new Vector3(rectTrans.position.x, rectTrans.position.y + 20, rectTrans.position.z);
-
-           
-
+            Put20Up();
+            if (rectTrans.anchoredPosition.y>boundary)
+            {
+                boundary += 384;
+                BackGroundObjectSetting();
+            }
             return;
         }
         string path = "hair/ManDown/DawnHair" + hairIndex;
-        Debug.Log(path);
         hairImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
     }
 
     void BackGroungRecordsLoad()
     {
         int index = dataManager.data.clickStage;
-
-        for(int i=1;i<index;i++)
+        while(rectTrans.anchoredPosition.y < boundary)
         {
-            BackGroundObjectSetting(i);
+            boundary += 384;
+            BackGroundObjectSetting();
         }
     }
 
-    void BackGroundObjectSetting(int i)
+    void BackGroundObjectSetting()
     {
         GameObject backGround = Instantiate(backGroundPrefab);
         backGround.transform.SetParent(backGroundParent.transform);
         backGround.transform.localScale = new Vector3(1, 1, 1);
-        backGround.transform.localPosition = new Vector3(0, 1151.9f + (384 * (float)i), 0);
+        backGround.transform.localPosition = new Vector3(0, 1151.9f + (384 * (70-dataManager.data.clickStage)), 0);
         cameraMove.maxBoundary += 2;
     }
     private void Update()
     {
         // # 터치 이벤트 
-        //PCTouchEvent();
-        MobileTouchEvent();
+        PCTouchEvent();
+        //MobileTouchEvent();
 
         // # 클릭수에 따른 스프라이트 관리 
         SpriteControl();
-
+        
     }
 
     void MobileTouchEvent()
@@ -152,7 +159,7 @@ public class GameController : MonoBehaviour
             return;
         else if (clickCount >= maxCount) //이때 생성될 프리팹 이미지 변경?
         {
-            Debug.Log("생성");
+            //Debug.Log("생성");
             dataManager.data.clickStage++;
             dataManager.Save();
             InstantiateObject();
@@ -162,8 +169,16 @@ public class GameController : MonoBehaviour
 
     void InstantiateObject()
     {
-        Debug.Log("머리 생성합니다.");
+        //Debug.Log("머리 생성합니다.");
         HairRecordsLoad();
-        BackGroundObjectSetting(dataManager.data.clickStage-1);
+        BackGroundObjectSetting();
+    }
+
+    void Put20Up()
+    {
+        //머리 올라가는 코드 longhair 변수는 유니티랑 위에서 할당해줌
+        longHair.transform.localPosition = (new Vector3(longHair.transform.localPosition.x, longHair.transform.localPosition.y + 20, longHair.transform.localPosition.z));
+        chair.transform.localPosition = (new Vector3(chair.transform.localPosition.x, chair.transform.localPosition.y + 20, chair.transform.localPosition.z));
+        man.transform.localPosition = (new Vector3(man.transform.localPosition.x, man.transform.localPosition.y + 20, man.transform.localPosition.z));
     }
 }

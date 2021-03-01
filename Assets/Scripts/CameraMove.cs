@@ -27,8 +27,8 @@ public class CameraMove : MonoBehaviour
     {
         // # 방향벡터 계산
         if (!gamePause.paused)
-            //Drag();
-            MobileDrag();
+            Drag();
+            //MobileDrag();
 
         // # 화면 밖으로 못나가게 지정
         Boundary();
