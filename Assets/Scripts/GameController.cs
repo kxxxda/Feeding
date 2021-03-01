@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public GameObject backGroundParent;     //배경의 부모
     public Image manImage;
     public Image hairImage;
+    public Image hair47;
     public Image longHair;
 
     public Text text;
@@ -43,32 +44,41 @@ public class GameController : MonoBehaviour
     void HairRecordsLoad()
     {
         int hairIndex = dataManager.data.clickStage;
-
-        if (hairIndex >= 52)
+        if (hairIndex < 47)
+        {
+            string path = "hair/ManDown/DawnHair" + hairIndex;
+            Debug.Log(path);
+            hairImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+        }
+        else if (hairIndex >= 47 && hairIndex <= 92)
         {
             hairImage.gameObject.SetActive(false);
-            longHair.gameObject.SetActive(true);
-            RectTransform rectTrans = longHair.rectTransform;
-            Debug.Log(rectTrans.position.y);
-            Debug.Log(rectTrans.position.y + 20);
-
-            rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x, rectTrans.sizeDelta.y + 20);
-            rectTrans.position = new Vector3(rectTrans.position.x, rectTrans.position.y + 20, rectTrans.position.z);
-
-           
-
-            return;
+            Hair20Stretch(hair47);
         }
-        string path = "hair/ManDown/DawnHair" + hairIndex;
-        Debug.Log(path);
-        hairImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+        else
+        {
+            hair47.gameObject.SetActive(false);
+            Hair20Stretch(longHair);
+        }
+
+        return;
+    }
+
+    void Hair20Stretch(Image hair)
+    {
+        hair.gameObject.SetActive(true);
+
+        RectTransform rectTrans = hair.rectTransform;
+        rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x, rectTrans.sizeDelta.y + 20);
+
+        return;
     }
 
     void BackGroungRecordsLoad()
     {
         int index = dataManager.data.clickStage;
 
-        for(int i=1;i<index;i++)
+        for (int i = 1; i < index; i++)
         {
             BackGroundObjectSetting(i);
         }
@@ -85,8 +95,8 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         // # 터치 이벤트 
-        //PCTouchEvent();
-        MobileTouchEvent();
+        PCTouchEvent();
+        //MobileTouchEvent();
 
         // # 클릭수에 따른 스프라이트 관리 
         SpriteControl();
@@ -164,6 +174,6 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("머리 생성합니다.");
         HairRecordsLoad();
-        BackGroundObjectSetting(dataManager.data.clickStage-1);
+        BackGroundObjectSetting(dataManager.data.clickStage - 1);
     }
 }
