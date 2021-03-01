@@ -64,7 +64,7 @@ public class GamePause : MonoBehaviour
     {
         dataManager.InitiateStage();
         dataManager.Save();
-        SceneManager.LoadScene("Game Scene test 1");
+        SceneManager.LoadScene("Game Scene test");
 
     }
     public void StageInitialize()

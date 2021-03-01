@@ -10,12 +10,13 @@ public class GameController : MonoBehaviour
     public GameObject backGroundParent;     //배경의 부모
     public Image manImage;
     public Image hairImage;
+    public GameObject hair47;
     public GameObject longHair;
     public GameObject chair;
     public GameObject chairLeg;
     public GameObject man;
 
-    private RectTransform rectTrans;
+    private RectTransform longHairRectTrans;
     private Camera mainCamera;
     private DataManager dataManager;
     private ObjectManager objectManager;
@@ -34,47 +35,62 @@ public class GameController : MonoBehaviour
         dataManager = GameObject.Find("Data Manager").GetComponent<DataManager>();
         objectManager = GameObject.Find("Object Manager").GetComponent<ObjectManager>();
         cameraMove = mainCamera.GetComponent<CameraMove>();
-        rectTrans = longHair.GetComponent<RectTransform>();
+        longHairRectTrans = longHair.GetComponent<RectTransform>();
 
 
         maxClick = 10;//스테이지간 클릭 간격 조절
 
         boundary = 1294;
-        Debug.Log(rectTrans.rect.position.y);
     }
 
     private void Start()
     {
         HairRecordsLoad();  //머리 이전 기록 가져오기
-        BackGroungRecordsLoad();
+        //BackGroungRecordsLoad();
     }
     void HairRecordsLoad()
     {
         int hairIndex = dataManager.data.clickStage;
-            
-        if (hairIndex >= 52)
+        if (hairIndex < 47)
+        {
+            string path = "hair/ManDown/DawnHair" + hairIndex;
+            Debug.Log(path);
+            hairImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+        }
+        else if (hairIndex == 47)
         {
             hairImage.gameObject.SetActive(false);
-            longHair.gameObject.SetActive(true);
-
-            //렉트 트랜스도 어웨이크에서 할당함
-            rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x, rectTrans.sizeDelta.y + 20);
-            Put20Up();
-            if (rectTrans.anchoredPosition.y>boundary)
-            {
-                boundary += 384;
-                BackGroundObjectSetting();
-            }
-            return;
+            hair47.gameObject.SetActive(true);
         }
-        string path = "hair/ManDown/DawnHair" + hairIndex;
-        hairImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+        else if (hairIndex >= 47 && hairIndex <= 92)
+        {
+            Hair20Stretch(hair47);
+        }
+        else if (hairIndex == 93)
+        {
+            hair47.gameObject.SetActive(false);
+            longHair.gameObject.SetActive(true);
+        }
+        else
+        {
+            Hair20Stretch(longHair);
+        }
+
+        return;
+    }
+
+    void Hair20Stretch(GameObject hair)
+    {
+        RectTransform rectTrans = hair.GetComponent<RectTransform>();
+        rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x, rectTrans.sizeDelta.y + 20);
+
+        return;
     }
 
     void BackGroungRecordsLoad()
     {
         int index = dataManager.data.clickStage;
-        while(rectTrans.anchoredPosition.y < boundary)
+        while(longHairRectTrans.anchoredPosition.y < boundary)
         {
             boundary += 384;
             BackGroundObjectSetting();
@@ -97,7 +113,7 @@ public class GameController : MonoBehaviour
 
         // # 클릭수에 따른 스프라이트 관리 
         SpriteControl();
-        
+
     }
 
     void MobileTouchEvent()
@@ -171,7 +187,7 @@ public class GameController : MonoBehaviour
     {
         //Debug.Log("머리 생성합니다.");
         HairRecordsLoad();
-        BackGroundObjectSetting();
+        //BackGroundObjectSetting();
     }
 
     void Put20Up()
