@@ -6,17 +6,27 @@ using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject backGroundPrefab;     //배경 프리팹 1개 선언하고 배경 바꿔주기 --> 전부 프리팹화 하면 너무 많아짐
+    //배경 관련
+    public GameObject[] backGroundPrefab;     
     public GameObject backGroundParent;     //배경의 부모
-    public Image manImage;
+    private int boundary;                   //화면 바운더리 (이 수치를 지나면 배경 생성)
+    private int blockCount;                 //몇개째 배경이 붙었는지 카운트
+
+    //머리 관련
     public Image hairImage;
     public GameObject hair47;
     public GameObject longHair;
+    private RectTransform longHairRectTrans;
+    
+    //위자 관련
     public GameObject chair;
     public GameObject chairLeg;
+    
+    //사람 관련
+    public Image manImage;
     public GameObject man;
 
-    private RectTransform longHairRectTrans;
+
     private Camera mainCamera;
     private DataManager dataManager;
     private ObjectManager objectManager;
@@ -25,7 +35,6 @@ public class GameController : MonoBehaviour
     private Vector2 touchPos;
     private int maxClick;
 
-    private int boundary;
 
     private void Awake()
     {
@@ -40,13 +49,15 @@ public class GameController : MonoBehaviour
 
         maxClick = 10;//스테이지간 클릭 간격 조절
 
-        boundary = 1294;
+        boundary = 2284;//머리가 디폴트 배경화면을 나가는 시점 //longHair의 position.y
+        blockCount = 0;
     }
 
     private void Start()
     {
         HairRecordsLoad();  //머리 이전 기록 가져오기
-        //BackGroungRecordsLoad();
+        ChairRecordsLoad();
+        BackGroungRecordsLoad();
     }
     void HairRecordsLoad()
     {
@@ -54,7 +65,6 @@ public class GameController : MonoBehaviour
         if (hairIndex < 47)
         {
             string path = "hair/ManDown/DawnHair" + hairIndex;
-            Debug.Log(path);
             hairImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
         }
         else if (hairIndex == 47)
@@ -64,7 +74,7 @@ public class GameController : MonoBehaviour
         }
         else if (hairIndex >= 47 && hairIndex <= 92)
         {
-            Hair20Stretch(hair47);
+            Obj20Stretch(hair47);
         }
         else if (hairIndex == 93)
         {
@@ -73,37 +83,68 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            Hair20Stretch(longHair);
+            Obj20Stretch(longHair);
+            Put20Up();
         }
 
         return;
     }
 
-    void Hair20Stretch(GameObject hair)
+    void Obj20Stretch(GameObject obj)
     {
-        RectTransform rectTrans = hair.GetComponent<RectTransform>();
+        RectTransform rectTrans = obj.GetComponent<RectTransform>();
         rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x, rectTrans.sizeDelta.y + 20);
 
         return;
     }
+    void ChairRecordsLoad()
+    {
+        if (dataManager.data.clickStage > 93)
+            Obj20Stretch(chairLeg);
+    }
 
+    
     void BackGroungRecordsLoad()
     {
-        int index = dataManager.data.clickStage;
-        while(longHairRectTrans.anchoredPosition.y < boundary)
+        while((int)longHairRectTrans.sizeDelta.y > boundary)
         {
             boundary += 384;
             BackGroundObjectSetting();
         }
     }
-
     void BackGroundObjectSetting()
     {
-        GameObject backGround = Instantiate(backGroundPrefab);
+        int num = BackGroundType();
+        GameObject backGround = Instantiate(backGroundPrefab[num]);
         backGround.transform.SetParent(backGroundParent.transform);
         backGround.transform.localScale = new Vector3(1, 1, 1);
-        backGround.transform.localPosition = new Vector3(0, 1151.9f + (384 * (70-dataManager.data.clickStage)), 0);
+        backGround.transform.localPosition = new Vector3(0, 1151.9f + 384*blockCount, 0);
         cameraMove.maxBoundary += 2;
+        blockCount++;
+    }
+    int BackGroundType()//각 배경마다 몇개씩 할건지 정해야함
+    {
+        if (blockCount == 0)
+            return 0;
+        else if (blockCount >= 1 && blockCount < 5)
+            return 1;
+        else if (blockCount == 5)
+            return 2;
+        else if (blockCount > 5 && blockCount < 10)
+            return 3;
+        else if (blockCount == 10)
+            return 4;
+        else if (blockCount > 10 && blockCount < 15)
+            return 5;
+        else if (blockCount == 15)
+            return 6;
+        else if (blockCount > 15 && blockCount < 20)
+            return 7;
+        else if (blockCount == 20)
+            return 8;
+        else
+            return 9;
+
     }
     private void Update()
     {
@@ -113,7 +154,7 @@ public class GameController : MonoBehaviour
 
         // # 클릭수에 따른 스프라이트 관리 
         SpriteControl();
-
+        //Debug.Log(longHairRectTrans.sizeDelta.y);
     }
 
     void MobileTouchEvent()
@@ -179,7 +220,6 @@ public class GameController : MonoBehaviour
             dataManager.data.clickStage++;
             dataManager.Save();
             InstantiateObject();
-            //progress바 올리기
         }
     }
 
@@ -187,13 +227,12 @@ public class GameController : MonoBehaviour
     {
         //Debug.Log("머리 생성합니다.");
         HairRecordsLoad();
-        //BackGroundObjectSetting();
+        ChairRecordsLoad();
+        BackGroungRecordsLoad();
     }
 
     void Put20Up()
     {
-        //머리 올라가는 코드 longhair 변수는 유니티랑 위에서 할당해줌
-        longHair.transform.localPosition = (new Vector3(longHair.transform.localPosition.x, longHair.transform.localPosition.y + 20, longHair.transform.localPosition.z));
         chair.transform.localPosition = (new Vector3(chair.transform.localPosition.x, chair.transform.localPosition.y + 20, chair.transform.localPosition.z));
         man.transform.localPosition = (new Vector3(man.transform.localPosition.x, man.transform.localPosition.y + 20, man.transform.localPosition.z));
     }
