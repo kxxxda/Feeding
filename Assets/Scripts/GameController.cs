@@ -73,13 +73,13 @@ public class GameController : MonoBehaviour
         {
             hairImage.gameObject.SetActive(false);
             hair47.gameObject.SetActive(true);
-            Hair20Stretch(hair47, hairIndex - 47);
+            Obj20StretchLoad(hair47, hairIndex - 47);
         }
         else
         {
             hairImage.gameObject.SetActive(false);
             longHair.gameObject.SetActive(true);
-            Hair20Stretch(longHair, hairIndex - 93);
+            Obj20StretchLoad(longHair, hairIndex - 93);
             for (int i = 0; i < hairIndex - 93; i++)
                 Put20Up();
         }
@@ -87,9 +87,9 @@ public class GameController : MonoBehaviour
         return;
     }
 
-    void Hair20Stretch(GameObject hair, int cnt)
+    void Obj20StretchLoad(GameObject obj, int cnt)
     {
-        RectTransform rectTrans = hair.GetComponent<RectTransform>();
+        RectTransform rectTrans = obj.GetComponent<RectTransform>();
         rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x, rectTrans.sizeDelta.y + 20 * cnt);
         return;
     }
@@ -98,16 +98,21 @@ public class GameController : MonoBehaviour
     {
         RectTransform rectTrans = obj.GetComponent<RectTransform>();
         rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x, rectTrans.sizeDelta.y + 20);
-        Put20Up();
+        
         return;
     }
 
-    void ChairRecordsLoad()
+    void ChairLoad()
     {
         if (dataManager.data.clickStage > 93)
             Obj20Stretch(chairLeg);
     }
-
+    void ChairRecordsLoad()
+    {
+        int hairIndex = dataManager.data.clickStage;
+        if (dataManager.data.clickStage > 93)
+            Obj20StretchLoad(chairLeg, hairIndex - 93);
+    }
 
     void BackGroungRecordsLoad()
     {
@@ -232,7 +237,7 @@ public class GameController : MonoBehaviour
     {
         //Debug.Log("머리 생성합니다.");
         HairLoad();
-        ChairRecordsLoad();
+        ChairLoad();
         BackGroungRecordsLoad();
     }
     void HairLoad() //HairRecordsLoad 바꾼거에 맞춰서 수정하기
@@ -251,7 +256,7 @@ public class GameController : MonoBehaviour
         }
         else if (hairIndex > 47 && hairIndex <= 92)
         {
-            Hair20Stretch(hair47, 1);
+            Obj20Stretch(hair47);
         }
         else if (hairIndex == 93)
         {
@@ -260,7 +265,8 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            Hair20Stretch(longHair, 1);
+            Obj20Stretch(longHair);
+            Put20Up();
         }
 
         return;
