@@ -45,44 +45,41 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        HairRecordsLoad();  //머리 이전 기록 가져오기
+        HairRecordsLoad();  
+        Debug.Log("머리 이전 기록 가져오기");
         //BackGroungRecordsLoad();
     }
-    void HairRecordsLoad()
+
+    void HairRecordsLoad()  //머리 이전 기록 가져오기
     {
         int hairIndex = dataManager.data.clickStage;
+
         if (hairIndex < 47)
         {
             string path = "hair/ManDown/DawnHair" + hairIndex;
             Debug.Log(path);
             hairImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
         }
-        else if (hairIndex == 47)
+        else if (hairIndex >= 47 && hairIndex <= 92) 
         {
             hairImage.gameObject.SetActive(false);
             hair47.gameObject.SetActive(true);
+            Hair20Stretch(hair47, hairIndex-47);
         }
-        else if (hairIndex >= 47 && hairIndex <= 92)
+        else 
         {
-            Hair20Stretch(hair47);
-        }
-        else if (hairIndex == 93)
-        {
-            hair47.gameObject.SetActive(false);
+            hairImage.gameObject.SetActive(false);
             longHair.gameObject.SetActive(true);
-        }
-        else
-        {
-            Hair20Stretch(longHair);
+            Hair20Stretch(longHair, hairIndex - 93);
         }
 
         return;
     }
 
-    void Hair20Stretch(GameObject hair)
+    void Hair20Stretch(GameObject hair, int cnt)
     {
         RectTransform rectTrans = hair.GetComponent<RectTransform>();
-        rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x, rectTrans.sizeDelta.y + 20);
+        rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x, rectTrans.sizeDelta.y + 20*cnt);
 
         return;
     }
@@ -178,16 +175,41 @@ public class GameController : MonoBehaviour
             //Debug.Log("생성");
             dataManager.data.clickStage++;
             dataManager.Save();
-            InstantiateObject();
+            HairLoad();
             //progress바 올리기
         }
     }
 
-    void InstantiateObject()
+    void HairLoad() //HairRecordsLoad 바꾼거에 맞춰서 수정하기
     {
-        //Debug.Log("머리 생성합니다.");
-        HairRecordsLoad();
-        //BackGroundObjectSetting();
+        int hairIndex = dataManager.data.clickStage;
+
+        if (hairIndex < 47)
+        {
+            string path = "hair/ManDown/DawnHair" + hairIndex;
+            Debug.Log(path);
+            hairImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+        }
+        else if (hairIndex == 47)
+        {
+            hairImage.gameObject.SetActive(false);
+            hair47.gameObject.SetActive(true);
+        }
+        else if (hairIndex > 47 && hairIndex <= 92)
+        {
+            Hair20Stretch(hair47, 1);
+        }
+        else if (hairIndex == 93)
+        {
+            hair47.gameObject.SetActive(false);
+            longHair.gameObject.SetActive(true);
+        }
+        else
+        {
+            Hair20Stretch(longHair, 1);
+        }
+
+        return;
     }
 
     void Put20Up()
