@@ -755,7 +755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 264462300}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: BackgroundObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2768,7 +2768,7 @@ MonoBehaviour:
   - {fileID: 5952161814907687241, guid: 0c9d23ed3f8222a4d8712947c51c6241, type: 3}
   - {fileID: 2702414865954763710, guid: d557f52fec51f634bb25f1da7f057129, type: 3}
   - {fileID: 829616326422767190, guid: ae8476b9bdc6a4c47bbaaf07ba994e72, type: 3}
-  backGroundParent: {fileID: 224772106}
+  backGroundParent: {fileID: 264462299}
   hairImage: {fileID: 724984847}
   hair47: {fileID: 1765806918}
   longHair: {fileID: 408433440}

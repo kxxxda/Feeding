@@ -103,6 +103,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
+                backHair.gameObject.SetActive(true);
                 Obj20Stretch(longHair);
                 Obj20Stretch(backHair);
                 Put20Up();
