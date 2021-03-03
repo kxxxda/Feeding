@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public Image hairImage;
     public GameObject hair47;
     public GameObject longHair;
+    public GameObject backHair;
     private RectTransform longHairRectTrans;
 
     //위자 관련
@@ -79,7 +80,9 @@ public class GameController : MonoBehaviour
         {
             hairImage.gameObject.SetActive(false);
             longHair.gameObject.SetActive(true);
+            backHair.gameObject.SetActive(true);
             Obj20StretchLoad(longHair, hairIndex - 93);
+            Obj20StretchLoad(backHair, hairIndex - 93);
             for (int i = 0; i < hairIndex - 93; i++)
                 Put20Up();
         }
@@ -265,7 +268,9 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            backHair.gameObject.SetActive(true);
             Obj20Stretch(longHair);
+            Obj20Stretch(backHair);
             Put20Up();
         }
 
