@@ -104,8 +104,9 @@ public class GameController : MonoBehaviour
             else
             {
                 Obj20Stretch(longHair);
+                Obj20Stretch(backHair);
                 Put20Up();
-            }sd\
+            }
             hairIndex++;
         }
 
