@@ -17,10 +17,12 @@ public class GameController : MonoBehaviour
     public GameObject hair47;
     public GameObject longHair;
     private RectTransform longHairRectTrans;
+    private int hairIndex;
 
     //위자 관련
     public GameObject chair;
     public GameObject chairLeg;
+    private int chairIndex;
 
     //사람 관련
     public Image manImage;
@@ -51,48 +53,64 @@ public class GameController : MonoBehaviour
 
         boundary = 2284;//머리가 디폴트 배경화면을 나가는 시점 //longHair의 position.y
         blockCount = 0;
+
+        hairIndex = 0;
+        chairIndex = 0;
     }
 
     private void Start()
     {
-        HairRecordsLoad();  //머리 이전 기록 가져오기
-        ChairRecordsLoad();
-        BackGroungRecordsLoad();
+        InstantiateObject();
     }
-
-    void HairRecordsLoad()  //머리 이전 기록 가져오기
+    
+    void ManRecorsdsLoad()
     {
-        int hairIndex = dataManager.data.clickStage;
+        string path = "man/";
 
-        if (hairIndex < 47)
-        {
-            string path = "hair/ManDown/DawnHair" + hairIndex;
-            hairImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
-        }
-        else if (hairIndex >= 47 && hairIndex <= 92)
-        {
-            hairImage.gameObject.SetActive(false);
-            hair47.gameObject.SetActive(true);
-            Obj20StretchLoad(hair47, hairIndex - 47);
-        }
+        int manIndex = dataManager.data.clickStage;
+        if (manIndex < 26)
+            path += "Mansad";
+        else if (manIndex >= 26 && manIndex < 33)
+            path += "Mansoso";
         else
+            path += "Mansmile";
+
+        manImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+    }
+    void HairRecorsdsLoad()  //머리 이전 기록 가져오기
+    {
+        while(hairIndex < dataManager.data.clickStage)
         {
-            hairImage.gameObject.SetActive(false);
-            longHair.gameObject.SetActive(true);
-            Obj20StretchLoad(longHair, hairIndex - 93);
-            for (int i = 0; i < hairIndex - 93; i++)
+            if (hairIndex < 47)
+            {
+                string path = "hair/ManDown/DawnHair" + hairIndex;
+                hairImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+            }
+            else if (hairIndex == 47)
+            {
+                hairImage.gameObject.SetActive(false);
+                hair47.gameObject.SetActive(true);
+            }
+            else if (hairIndex > 47 && hairIndex <= 92)
+            {
+                Obj20Stretch(hair47);
+            }
+            else if (hairIndex == 93)
+            {
+                hair47.gameObject.SetActive(false);
+                longHair.gameObject.SetActive(true);
+            }
+            else
+            {
+                Obj20Stretch(longHair);
                 Put20Up();
+            }
+            hairIndex++;
         }
 
         return;
     }
-
-    void Obj20StretchLoad(GameObject obj, int cnt)
-    {
-        RectTransform rectTrans = obj.GetComponent<RectTransform>();
-        rectTrans.sizeDelta = new Vector2(rectTrans.sizeDelta.x, rectTrans.sizeDelta.y + 20 * cnt);
-        return;
-    }
+    
 
     void Obj20Stretch(GameObject obj)
     {
@@ -102,16 +120,14 @@ public class GameController : MonoBehaviour
         return;
     }
 
-    void ChairLoad()
-    {
-        if (dataManager.data.clickStage > 93)
-            Obj20Stretch(chairLeg);
-    }
     void ChairRecordsLoad()
     {
-        int hairIndex = dataManager.data.clickStage;
-        if (dataManager.data.clickStage > 93)
-            Obj20StretchLoad(chairLeg, hairIndex - 93);
+        while(chairIndex< dataManager.data.clickStage-93)
+        {
+            Obj20Stretch(chairLeg);                                                                                                                                 //의자 목 20늘리기
+            chair.transform.localPosition = (new Vector3(chair.transform.localPosition.x, chair.transform.localPosition.y + 20, chair.transform.localPosition.z));  //의자 20올리기
+            chairIndex++;
+        }
     }
 
     void BackGroungRecordsLoad()
@@ -136,21 +152,21 @@ public class GameController : MonoBehaviour
     {
         if (blockCount == 0)
             return 0;
-        else if (blockCount >= 1 && blockCount < 5)
+        else if (blockCount > 0 && blockCount < 16)
             return 1;
-        else if (blockCount == 5)
+        else if (blockCount == 16)
             return 2;
-        else if (blockCount > 5 && blockCount < 10)
+        else if (blockCount > 16 && blockCount < 32)
             return 3;
-        else if (blockCount == 10)
+        else if (blockCount == 32)
             return 4;
-        else if (blockCount > 10 && blockCount < 15)
+        else if (blockCount > 32 && blockCount < 48)
             return 5;
-        else if (blockCount == 15)
+        else if (blockCount == 48)
             return 6;
-        else if (blockCount > 15 && blockCount < 20)
+        else if (blockCount > 48 && blockCount < 63)
             return 7;
-        else if (blockCount == 20)
+        else if (blockCount == 63)
             return 8;
         else
             return 9;
@@ -236,46 +252,15 @@ public class GameController : MonoBehaviour
     void InstantiateObject()
     {
         //Debug.Log("머리 생성합니다.");
-        HairLoad();
-        ChairLoad();
+        ManRecorsdsLoad();
+        HairRecorsdsLoad();
+        ChairRecordsLoad();
         BackGroungRecordsLoad();
     }
-    void HairLoad() //HairRecordsLoad 바꾼거에 맞춰서 수정하기
-    {
-        int hairIndex = dataManager.data.clickStage;
-
-        if (hairIndex < 47)
-        {
-            string path = "hair/ManDown/DawnHair" + hairIndex;
-            hairImage.sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
-        }
-        else if (hairIndex == 47)
-        {
-            hairImage.gameObject.SetActive(false);
-            hair47.gameObject.SetActive(true);
-        }
-        else if (hairIndex > 47 && hairIndex <= 92)
-        {
-            Obj20Stretch(hair47);
-        }
-        else if (hairIndex == 93)
-        {
-            hair47.gameObject.SetActive(false);
-            longHair.gameObject.SetActive(true);
-        }
-        else
-        {
-            Obj20Stretch(longHair);
-            Put20Up();
-        }
-
-        return;
-    }
-
-
+    
     void Put20Up()
     {
-        chair.transform.localPosition = (new Vector3(chair.transform.localPosition.x, chair.transform.localPosition.y + 20, chair.transform.localPosition.z));
+        
         man.transform.localPosition = (new Vector3(man.transform.localPosition.x, man.transform.localPosition.y + 20, man.transform.localPosition.z));
     }
 }
