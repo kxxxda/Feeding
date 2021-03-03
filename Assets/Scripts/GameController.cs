@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public Image hairImage;
     public GameObject hair47;
     public GameObject longHair;
+    public GameObject backHair;
     private RectTransform longHairRectTrans;
     private int hairIndex;
 
@@ -104,7 +105,7 @@ public class GameController : MonoBehaviour
             {
                 Obj20Stretch(longHair);
                 Put20Up();
-            }
+            }sd\
             hairIndex++;
         }
 
