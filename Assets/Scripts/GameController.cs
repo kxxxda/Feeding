@@ -29,6 +29,10 @@ public class GameController : MonoBehaviour
     public Image manImage;
     public GameObject man;
 
+    //배경 오브젝트 관련
+    public GameObject backGroundObjPrefab;
+    public GameObject backGroundObjParent;     //배경의 부모
+    private int repeatCount;
 
     private Camera mainCamera;
     private DataManager dataManager;
@@ -54,6 +58,7 @@ public class GameController : MonoBehaviour
 
         boundary = 2284;//머리가 디폴트 배경화면을 나가는 시점 //longHair의 position.y
         blockCount = 0;
+        repeatCount = 0;
 
         hairIndex = 0;
         chairIndex = 0;
@@ -133,15 +138,15 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void BackGroungRecordsLoad()
+    void BackGroundRecordsLoad()
     {
-        while ((int)longHairRectTrans.sizeDelta.y > boundary)
+        while ((int)longHairRectTrans.sizeDelta.y + 115 > boundary)
         {
             boundary += 384;
-            BackGroundObjectSetting();
+            BackGroundSetting();
         }
     }
-    void BackGroundObjectSetting()
+    void BackGroundSetting()
     {
         int num = BackGroundType();
         GameObject backGround = Instantiate(backGroundPrefab[num]);
@@ -150,6 +155,21 @@ public class GameController : MonoBehaviour
         backGround.transform.localPosition = new Vector3(0, 1151.9f + 384 * blockCount, 0);
         cameraMove.maxBoundary += 2;
         blockCount++;
+    }
+    void BackGroundObjRecordsLoad()
+    {
+        while (repeatCount < dataManager.data.clickStage - (1335+repeatCount*350))
+        {
+            BackGroundObjectSetting();
+            repeatCount++;
+        }
+    }
+    void BackGroundObjectSetting()
+    {
+        GameObject backGround = Instantiate(backGroundObjPrefab);
+        backGround.transform.SetParent(backGroundObjParent.transform);
+        backGround.transform.localScale = new Vector3(1, 1, 1);
+        backGround.transform.localPosition = new Vector3(0, repeatCount*7000, 0);
     }
     int BackGroundType()//각 배경마다 몇개씩 할건지 정해야함
     {
@@ -258,7 +278,8 @@ public class GameController : MonoBehaviour
         ManRecorsdsLoad();
         HairRecorsdsLoad();
         ChairRecordsLoad();
-        BackGroungRecordsLoad();
+        BackGroundRecordsLoad();
+        BackGroundObjRecordsLoad();
     }
     
     void Put20Up()
