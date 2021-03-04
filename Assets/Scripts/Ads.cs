@@ -11,9 +11,9 @@ public class Ads : MonoBehaviour
     public void Start()
     {
 #if UNITY_ANDROID
-        string appId = "ca-app-pub-3940256099942544~6300978111";
+        string appId = "ca-app-pub-1423399632585507~2094875173";
 #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544~2934735716";
+            string adUnitId = "ca-app-pub-1423399632585507~2094875173";
 #else
             string adUnitId = "unexpected_platform";
 #endif
@@ -36,7 +36,7 @@ public class Ads : MonoBehaviour
 #endif
 
         // Create a 320x50 banner at the top of the screen.
-        this.bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Top);
+        this.bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Bottom);
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();

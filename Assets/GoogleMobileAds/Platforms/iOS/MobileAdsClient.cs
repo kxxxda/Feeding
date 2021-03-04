@@ -53,11 +53,6 @@ namespace GoogleMobileAds.iOS
             Externs.GADUInitializeWithCallback(this.mobileAdsClientPtr, InitializationCompleteCallback);
         }
 
-        public void DisableMediationInitialization()
-        {
-            Externs.GADUDisableMediationInitialization();
-        }
-
         public void SetApplicationVolume(float volume)
         {
             Externs.GADUSetApplicationVolume(volume);

@@ -116,21 +116,11 @@ namespace GoogleMobileAds.Api
 
         public static bool operator ==(AdSize a, AdSize b)
         {
-            if ((object)a == null)
-            {
-                return (object)b == null;
-            }
-
             return a.Equals(b);
         }
 
         public static bool operator !=(AdSize a, AdSize b)
         {
-            if ((object)a == null)
-            {
-                return (object)b != null;
-            }
-
             return !a.Equals(b);
         }
 
