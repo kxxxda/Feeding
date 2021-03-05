@@ -732,10 +732,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 264f7001-def5-4128-a50f-2ef0756fdde5
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: Feeding
+  organizationId: dahyeonkk
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
